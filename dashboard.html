@@ -2,23 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Apex | Client Portal</title>
+    <title>Apex | Client Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
 </head>
-<body class="bg-[#050505] text-white p-8">
+<body class="p-6 md:p-12">
+    <!-- Navbar -->
     <nav class="flex justify-between items-center max-w-6xl mx-auto mb-12">
         <div class="text-2xl font-bold">APEX <span class="text-indigo-500">Portal</span></div>
-        <div class="bg-indigo-900/30 px-4 py-2 rounded-full border border-indigo-500/30">
-            Welcome, <span id="displayName" class="font-bold"></span>
+        <div class="flex items-center gap-4">
+            <div class="bg-indigo-900/30 px-4 py-2 rounded-full border border-indigo-500/30 text-sm">
+                👤 <span id="displayName" class="font-bold">User</span>
+            </div>
+            <button onclick="logout()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 px-4 py-2 rounded-full text-sm transition">Logout</button>
         </div>
     </nav>
-    <div class="max-w-6xl mx-auto p-10 border border-white/10 rounded-[2rem] bg-white/5">
-        <h2 class="text-2xl font-bold mb-4">My Projects</h2>
-        <p class="text-slate-400">Yahan tumhare active projects aur details show hongi.</p>
+
+    <!-- Dashboard Content -->
+    <div class="max-w-6xl mx-auto space-y-8">
+        <!-- Stats Row -->
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="glass p-6 rounded-3xl">
+                <h3 class="text-slate-400 text-sm">Active Projects</h3>
+                <p class="text-3xl font-bold mt-2">01</p>
+            </div>
+            <div class="glass p-6 rounded-3xl">
+                <h3 class="text-slate-400 text-sm">Pending Payment</h3>
+                <p class="text-3xl font-bold mt-2 text-indigo-400">$499</p>
+            </div>
+            <div class="glass p-6 rounded-3xl">
+                <h3 class="text-slate-400 text-sm">Next Deadline</h3>
+                <p class="text-lg font-semibold mt-2">Aug 25, 2026</p>
+            </div>
+        </div>
+
+        <!-- Recent Projects Section -->
+        <div class="glass p-8 rounded-[2rem]">
+            <h2 class="text-2xl font-bold mb-4">Active Project Details</h2>
+            <div class="space-y-4 text-slate-300">
+                <div class="p-4 bg-black/40 rounded-xl border border-white/5 flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-white">LLM Integration & Prompt Optimization</h4>
+                        <p class="text-xs text-slate-400 mt-1">Status: In Progress (Milestone 2)</p>
+                    </div>
+                    <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-xs border border-indigo-500/30">Active</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        document.getElementById('displayName').innerText = localStorage.getItem('apex_user_name');
+        // Check if user is logged in
+        const activeUser = localStorage.getItem('apex_active_user');
+        if (!activeUser) {
+            window.location.href = 'auth.html'; // Agar login nahi toh wapas bhej do
+        } else {
+            document.getElementById('displayName').innerText = activeUser;
+        }
+
+        function logout() {
+            localStorage.removeItem('apex_active_user');
+            window.location.href = 'auth.html';
+        }
     </script>
 </body>
 </html>
