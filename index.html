@@ -198,14 +198,31 @@
         </div>
     </div>
 
-    <!-- Tawk.to Script -->
+    <!-- Modified Tawk.to Script & Chat Interceptor -->
     <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    var Tawk_API = Tawk_API || {};
+    var Tawk_LoadStart = new Date();
+
+    // Jab bhi user chat open karne ki koshish kare
+    Tawk_API.onBeforeMaximize = function() {
+        const activeUser = JSON.parse(localStorage.getItem('apex_active_session'));
+        
+        if (!activeUser) {
+            // Agar login nahi hai, toh chat rok do aur login modal khol do
+            openAuthModal();
+            const errBox = document.getElementById('modalError');
+            errBox.innerText = "Please login or sign up first to start chatting with our experts! 💬";
+            errBox.classList.remove('hidden');
+            return false; // Chat widget ko khulne se rok dega
+        }
+        return true; // Agar login hai toh chat khul jayegi
+    };
+
     (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/6a7a58136f4cb41d46e4b0d1/1jvmug3ne';
-    s1.charset='UTF-8';
+    var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+    s1.async = true;
+    s1.src = 'https://embed.tawk.to/6a7a58136f4cb41d46e4b0d1/1jvmug3ne';
+    s1.charset = 'UTF8';
     s1.setAttribute('crossorigin','*');
     s0.parentNode.insertBefore(s1,s0);
     })();
@@ -296,7 +313,6 @@
                 localStorage.setItem('apex_active_session', JSON.stringify(userData));
             } else {
                 if (email === ADMIN_EMAIL) {
-                    // Direct Admin bypass password or set standard password check
                     const adminData = { name: "Mahmood Admin", email: ADMIN_EMAIL, password: password };
                     localStorage.setItem('apex_active_session', JSON.stringify(adminData));
                 } else {
@@ -382,7 +398,6 @@
                 `;
             });
 
-            // Update top counters dynamically
             document.getElementById('statLockedToday').innerText = lockedCount;
             document.getElementById('statDeliveredToday').innerText = deliveredCount;
             document.getElementById('statDeals').innerText = lockedCount + deliveredCount;
