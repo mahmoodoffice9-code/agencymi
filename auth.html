@@ -2,56 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex AI | Client Portal</title>
+    <title>Apex AI | Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; }
-        .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
-    </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-6">
-
-    <div class="glass-panel w-full max-w-md p-8 rounded-[2rem]">
-        <div class="text-center mb-8">
-            <h2 class="text-3xl font-extrabold tracking-tighter">Welcome to <span class="text-indigo-500">Apex</span></h2>
-            <p class="text-slate-400 mt-2">Manage your AI projects securely.</p>
-        </div>
-
+<body class="bg-[#050505] text-white flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-md p-8 border border-white/10 rounded-[2rem] bg-white/5">
+        <h2 class="text-3xl font-extrabold mb-6">Login to Portal</h2>
         <form id="authForm" class="space-y-4">
-            <!-- Name Field (Hidden by default, shown on signup) -->
-            <div id="nameField" class="hidden">
-                <label class="block text-sm font-medium mb-1">Full Name</label>
-                <input type="text" placeholder="John Doe" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 outline-none focus:border-indigo-500">
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium mb-1">Email</label>
-                <input type="email" placeholder="name@company.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 outline-none focus:border-indigo-500">
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium mb-1">Password</label>
-                <input type="password" placeholder="••••••••" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 outline-none focus:border-indigo-500">
-            </div>
-
-            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-xl font-bold transition">Sign In</button>
+            <input type="text" id="nameInput" placeholder="Enter your full name" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 outline-none">
+            <button type="submit" class="w-full bg-indigo-600 py-3 rounded-xl font-bold">Sign In</button>
         </form>
-
-        <p class="text-center text-slate-500 text-sm mt-6">
-            <span id="toggleText">Don't have an account?</span> 
-            <button onclick="toggleMode()" class="text-indigo-400 font-bold hover:underline">Sign up</button>
-        </p>
     </div>
 
     <script>
-        let isLogin = true;
-        function toggleMode() {
-            isLogin = !isLogin;
-            document.getElementById('nameField').classList.toggle('hidden');
-            document.querySelector('button[type="submit"]').innerText = isLogin ? 'Sign In' : 'Create Account';
-            document.getElementById('toggleText').innerText = isLogin ? "Don't have an account?" : "Already have an account?";
-        }
+        document.getElementById('authForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('nameInput').value;
+            localStorage.setItem('apex_user_name', name || 'Client');
+            window.location.href = 'dashboard.html'; // Yahan se dashboard pe bheje ga
+        });
     </script>
 </body>
 </html>
