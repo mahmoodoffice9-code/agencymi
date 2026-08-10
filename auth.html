@@ -2,24 +2,124 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Apex AI | Login</title>
+    <title>Apex AI | Portal Login & Signup</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
 </head>
-<body class="bg-[#050505] text-white flex items-center justify-center min-h-screen">
-    <div class="w-full max-w-md p-8 border border-white/10 rounded-[2rem] bg-white/5">
-        <h2 class="text-3xl font-extrabold mb-6">Login to Portal</h2>
+<body class="flex items-center justify-center min-h-screen p-6">
+
+    <div class="glass w-full max-w-md p-8 rounded-[2rem]">
+        <div class="text-center mb-6">
+            <h2 id="formTitle" class="text-3xl font-extrabold tracking-tighter">Welcome Back</h2>
+            <p id="formSubtitle" class="text-slate-400 text-sm mt-1">Login to access your client dashboard</p>
+        </div>
+
+        <!-- Error Message Box -->
+        <div id="errorMsg" class="hidden mb-4 p-3 bg-red-500/20 border border-red-500 text-red-300 text-sm rounded-xl text-center"></div>
+
         <form id="authForm" class="space-y-4">
-            <input type="text" id="nameInput" placeholder="Enter your full name" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 outline-none">
-            <button type="submit" class="w-full bg-indigo-600 py-3 rounded-xl font-bold">Sign In</button>
+            <!-- Name field (Only for Signup) -->
+            <div id="nameBox" class="hidden">
+                <label class="block text-sm font-medium mb-1">Full Name</label>
+                <input type="text" id="fullName" placeholder="John Doe" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 outline-none focus:border-indigo-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-1">Email</label>
+                <input type="email" id="email" required placeholder="name@company.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 outline-none focus:border-indigo-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-1">Password</label>
+                <input type="password" id="password" required placeholder="••••••••" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 outline-none focus:border-indigo-500">
+            </div>
+
+            <button type="submit" id="submitBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-xl font-bold transition">Sign In</button>
         </form>
+
+        <p class="text-center text-slate-400 text-sm mt-6">
+            <span id="toggleText">Don't have an account?</span> 
+            <button onclick="toggleMode()" class="text-indigo-400 font-bold hover:underline ml-1">Sign up</button>
+        </p>
     </div>
 
     <script>
+        let isLoginMode = true;
+
+        function toggleMode() {
+            isLoginMode = !isLoginMode;
+            document.getElementById('errorMsg').classList.add('hidden');
+            if (isLoginMode) {
+                document.getElementById('formTitle').innerText = "Welcome Back";
+                document.getElementById('formSubtitle').innerText = "Login to access your client dashboard";
+                document.getElementById('nameBox').classList.add('hidden');
+                document.getElementById('submitBtn').innerText = "Sign In";
+                document.getElementById('toggleText').innerText = "Don't have an account?";
+                event.target.innerText = "Sign up";
+            } else {
+                document.getElementById('formTitle').innerText = "Create Account";
+                document.getElementById('formSubtitle').innerText = "Register to start your AI projects";
+                document.getElementById('nameBox').classList.remove('hidden');
+                document.getElementById('submitBtn').innerText = "Sign Up";
+                document.getElementById('toggleText').innerText = "Already have an account?";
+                event.target.innerText = "Sign In";
+            }
+        }
+
         document.getElementById('authForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const name = document.getElementById('nameInput').value;
-            localStorage.setItem('apex_user_name', name || 'Client');
-            window.location.href = 'dashboard.html'; // Yahan se dashboard pe bheje ga
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorBox = document.getElementById('errorMsg');
+            errorBox.classList.add('hidden');
+
+            if (isLoginMode) {
+                // --- LOGIN LOGIC ---
+                const savedUser = JSON.parse(localStorage.getItem('apex_user_' + email));
+                
+                if (!savedUser) {
+                    errorBox.innerText = "Account not found! Please sign up first.";
+                    errorBox.classList.remove('hidden');
+                    return;
+                }
+
+                if (savedUser.password !== password) {
+                    errorBox.innerText = "Incorrect password! Please try again.";
+                    errorBox.classList.remove('hidden');
+                    return;
+                }
+
+                // Success Login -> Save active session & redirect
+                localStorage.setItem('apex_active_user', savedUser.name);
+                window.location.href = 'dashboard.html';
+
+            } else {
+                // --- SIGNUP LOGIC ---
+                const name = document.getElementById('fullName').value.trim();
+                if (!name) {
+                    errorBox.innerText = "Please enter your full name.";
+                    errorBox.classList.remove('hidden');
+                    return;
+                }
+
+                // Check if user already exists
+                if (localStorage.getItem('apex_user_' + email)) {
+                    errorBox.innerText = "Email already registered! Please login.";
+                    errorBox.classList.remove('hidden');
+                    return;
+                }
+
+                // Save user data
+                const userData = { name, email, password };
+                localStorage.setItem('apex_user_' + email, JSON.stringify(userData));
+                localStorage.setItem('apex_active_user', name);
+
+                // Success Signup -> Redirect to Dashboard
+                window.location.href = 'dashboard.html';
+            }
         });
     </script>
 </body>
