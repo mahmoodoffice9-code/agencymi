@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Apex | Client Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#050505] text-white p-8">
+    <nav class="flex justify-between items-center max-w-6xl mx-auto mb-12">
+        <div class="text-2xl font-bold">APEX <span class="text-indigo-500">Portal</span></div>
+        <div class="bg-indigo-900/30 px-4 py-2 rounded-full border border-indigo-500/30">
+            Welcome, <span id="displayName" class="font-bold"></span>
+        </div>
+    </nav>
+    <div class="max-w-6xl mx-auto p-10 border border-white/10 rounded-[2rem] bg-white/5">
+        <h2 class="text-2xl font-bold mb-4">My Projects</h2>
+        <p class="text-slate-400">Yahan tumhare active projects aur details show hongi.</p>
+    </div>
+
+    <script>
+        document.getElementById('displayName').innerText = localStorage.getItem('apex_user_name');
+    </script>
+</body>
+</html>
