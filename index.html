@@ -18,16 +18,13 @@
     <!-- Header -->
     <nav class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto border-b border-white/5">
         <div class="text-2xl font-extrabold tracking-tighter">APEX<span class="text-indigo-500">.</span></div>
-        
-        <!-- Dynamic Header Menu -->
         <div id="navMenu" class="flex gap-4 items-center">
-            <!-- Will be controlled by JS based on login state -->
+            <!-- Dynamic Nav -->
         </div>
     </nav>
 
-    <!-- Main Content Area -->
+    <!-- Main Website Content -->
     <div id="mainContent">
-        <!-- Hero Section -->
         <section class="max-w-5xl mx-auto px-6 py-20 text-center">
             <div class="inline-block px-4 py-1.5 mb-6 text-xs font-semibold bg-indigo-500/10 text-indigo-400 rounded-full border border-indigo-500/25 uppercase tracking-widest">
                 AI Implementation Partners
@@ -38,9 +35,8 @@
             <p class="text-lg text-slate-400 mb-10 max-w-xl mx-auto leading-relaxed">
                 Professional AI integration, prompt engineering, and API cost optimization to drive revenue.
             </p>
-            
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button onclick="openAuthModal()" class="inline-block glow-button bg-indigo-600 hover:bg-indigo-500 px-8 py-4 rounded-2xl font-bold transition text-center cursor-pointer">
+                <button onclick="openAuthModal()" class="glow-button bg-indigo-600 hover:bg-indigo-500 px-8 py-4 rounded-2xl font-bold transition cursor-pointer">
                     Client Portal / Login ⚡
                 </button>
                 <button onclick="Tawk_API.maximize()" class="px-8 py-4 rounded-2xl border border-white/10 hover:bg-white/5 transition font-medium cursor-pointer">
@@ -49,88 +45,137 @@
             </div>
         </section>
 
-        <!-- Services Section -->
         <section id="services" class="max-w-7xl mx-auto px-6 py-20">
             <div class="grid md:grid-cols-3 gap-6">
-                <div class="glass-card p-10 rounded-[2rem] border-l-4 border-indigo-500 group hover:border-indigo-400 transition-all">
+                <div class="glass-card p-10 rounded-[2rem] border-l-4 border-indigo-500">
                     <div class="text-4xl mb-6">🧠</div>
-                    <h3 class="text-xl font-bold mb-3">Prompt Engineering & LLM Integration</h3>
-                    <p class="text-slate-400 leading-relaxed text-sm">Extract precise, high-quality outputs from AI models and integrate them smoothly into your apps. 💡</p>
+                    <h3 class="text-xl font-bold mb-3">Prompt Engineering & LLM</h3>
+                    <p class="text-slate-400 text-sm">Extract precise, high-quality outputs from AI models. 💡</p>
                 </div>
-                <div class="glass-card p-10 rounded-[2rem] border-l-4 border-cyan-500 group hover:border-cyan-400 transition-all">
+                <div class="glass-card p-10 rounded-[2rem] border-l-4 border-cyan-500">
                     <div class="text-4xl mb-6">📉</div>
                     <h3 class="text-xl font-bold mb-3">API Cost Optimization</h3>
-                    <p class="text-slate-400 leading-relaxed text-sm">Dramatically reduce operational token expenses through smart routing and caching. 💸</p>
+                    <p class="text-slate-400 text-sm">Reduce operational token expenses through smart routing. 💸</p>
                 </div>
-                <div class="glass-card p-10 rounded-[2rem] border-l-4 border-purple-500 group hover:border-purple-400 transition-all">
+                <div class="glass-card p-10 rounded-[2rem] border-l-4 border-purple-500">
                     <div class="text-4xl mb-6">🚀</div>
                     <h3 class="text-xl font-bold mb-3">Custom LLM Deployment</h3>
-                    <p class="text-slate-400 leading-relaxed text-sm">Tailored LLMs built specifically for your business logic, ensuring top-tier speed and security. ⚡</p>
+                    <p class="text-slate-400 text-sm">Tailored LLMs built specifically for your business logic. ⚡</p>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- Client Portal Dashboard Section (Hidden by default until logged in) -->
+    <!-- Client Portal Section -->
     <div id="portalSection" class="hidden max-w-6xl mx-auto px-6 py-12">
-        <div class="flex flex-wrap gap-4 mb-8 border-b border-white/10 pb-4">
-            <button onclick="switchTab('projects')" id="tabBtnProjects" class="px-6 py-2 rounded-xl font-bold bg-indigo-600 text-white transition">📁 Active Projects</button>
-            <button onclick="switchTab('payments')" id="tabBtnPayments" class="px-6 py-2 rounded-xl font-bold bg-white/5 text-slate-400 hover:text-white transition">💳 Payments & Invoices</button>
-            <button onclick="switchTab('deadlines')" id="tabBtnDeadlines" class="px-6 py-2 rounded-xl font-bold bg-white/5 text-slate-400 hover:text-white transition">⏳ Deadlines & Timeline</button>
+        <h2 class="text-3xl font-bold mb-6">Client Dashboard</h2>
+        <div class="glass-card p-6 rounded-2xl">
+            <p class="text-slate-300">Welcome to your project portal. Your active deliverables and milestones are synced.</p>
         </div>
+    </div>
 
-        <!-- Tab 1: Projects -->
-        <div id="tabProjects" class="portal-tab space-y-6">
-            <h2 class="text-2xl font-bold">Your Active Projects</h2>
-            <div class="glass-card p-6 rounded-2xl flex justify-between items-center">
-                <div>
-                    <h4 class="font-bold text-lg">AI Workflow Automation (n8n & OpenAI)</h4>
-                    <p class="text-sm text-slate-400 mt-1">Milestone: Prompt tuning and vector database cache setup.</p>
-                </div>
-                <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-xs border border-indigo-500/30">In Progress</span>
+    <!-- ADMIN PANEL SECTION (Only for mahmoodoffice9@gmail.com) -->
+    <div id="adminSection" class="hidden max-w-7xl mx-auto px-6 py-12 space-y-8">
+        <div class="flex justify-between items-center border-b border-white/10 pb-6">
+            <div>
+                <h1 class="text-3xl font-extrabold">Apex Admin Control Panel 🛠️</h1>
+                <p class="text-slate-400 text-sm mt-1">Authorized Access: mahmoodoffice9@gmail.com</p>
+            </div>
+            <div class="bg-indigo-600/20 border border-indigo-500/40 px-4 py-2 rounded-xl text-indigo-300 text-sm font-semibold">
+                Admin Mode Active 🟢
             </div>
         </div>
 
-        <!-- Tab 2: Payments -->
-        <div id="tabPayments" class="portal-tab hidden space-y-6">
-            <h2 class="text-2xl font-bold">Payment & Billing History</h2>
-            <div class="glass-card p-6 rounded-2xl flex justify-between items-center">
-                <div>
-                    <h4 class="font-bold text-lg">Project Advance (50%)</h4>
-                    <p class="text-sm text-slate-400 mt-1">Status: Paid via Stripe / Secure Invoice</p>
-                </div>
-                <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-xs border border-green-500/30">$499 Paid ✅</span>
-            </div>
-            <div class="glass-card p-6 rounded-2xl flex justify-between items-center">
-                <div>
-                    <h4 class="font-bold text-lg">Final Milestone Payment (Pending)</h4>
-                    <p class="text-sm text-slate-400 mt-1">Due upon final deployment and delivery.</p>
-                </div>
-                <span class="px-3 py-1 bg-amber-500/20 text-amber-300 rounded-full text-xs border border-amber-500/30">$499 Due ⏳</span>
-            </div>
-        </div>
-
-        <!-- Tab 3: Deadlines -->
-        <div id="tabDeadlines" class="portal-tab hidden space-y-6">
-            <h2 class="text-2xl font-bold">Project Timelines & Milestones</h2>
+        <!-- Top Stats Counter Bar -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div class="glass-card p-6 rounded-2xl">
-                <h4 class="font-bold text-lg text-indigo-400">Target Delivery Date: August 25, 2026</h4>
-                <p class="text-sm text-slate-400 mt-2">All tasks are running on schedule according to the agreed integration roadmap.</p>
+                <h3 class="text-slate-400 text-xs uppercase tracking-wider">Msgs Today</h3>
+                <p id="statMsgs" class="text-3xl font-extrabold mt-2 text-cyan-400">14</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="text-slate-400 text-xs uppercase tracking-wider">Deals Closed Today</h3>
+                <p id="statDeals" class="text-3xl font-extrabold mt-2 text-indigo-400">3</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="text-slate-400 text-xs uppercase tracking-wider">Projects Locked (Today)</h3>
+                <p id="statLockedToday" class="text-3xl font-extrabold mt-2 text-emerald-400">2</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="text-slate-400 text-xs uppercase tracking-wider">Projects Delivered</h3>
+                <p id="statDeliveredToday" class="text-3xl font-extrabold mt-2 text-purple-400">1</p>
+            </div>
+        </div>
+
+        <!-- Add New Project Form Box -->
+        <div class="glass-card p-8 rounded-[2rem]">
+            <h3 class="text-xl font-bold mb-4">➕ Add New Client Project</h3>
+            <form id="addProjectForm" class="grid md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Project Name</label>
+                    <input type="text" id="pName" required placeholder="AI Chatbot Setup" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Client Name</label>
+                    <input type="text" id="pClient" required placeholder="Ahmed Khan" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Starting Date</label>
+                    <input type="date" id="pStart" required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Deadline Date</label>
+                    <input type="date" id="pDeadline" required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Price / Amount ($)</label>
+                    <input type="number" id="pAmount" required placeholder="500" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Project Status</label>
+                    <select id="pStatus" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm outline-none focus:border-indigo-500">
+                        <option value="Locked">Locked (Active)</option>
+                        <option value="Delivered">Delivered</option>
+                    </select>
+                </div>
+                <div class="md:col-span-3">
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-xl font-bold transition">Save & Lock Project 🚀</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- All Projects Management Table -->
+        <div class="glass-card p-8 rounded-[2rem]">
+            <h3 class="text-xl font-bold mb-4">📂 All Active & Completed Projects</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-white/10 text-slate-400 text-xs uppercase">
+                            <th class="py-3 px-4">Project Name</th>
+                            <th class="py-3 px-4">Client</th>
+                            <th class="py-3 px-4">Start Date</th>
+                            <th class="py-3 px-4">Deadline</th>
+                            <th class="py-3 px-4">Amount</th>
+                            <th class="py-3 px-4">Status</th>
+                            <th class="py-3 px-4">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminProjectsTable" class="text-sm divide-y divide-white/5">
+                        <!-- Dynamic rows injected via JS -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
-    <!-- Authentication Modal / Popup -->
+    <!-- Auth Modal -->
     <div id="authModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center p-6 z-50">
         <div class="glass-card w-full max-w-md p-8 rounded-[2rem] relative border border-white/10 bg-[#09090b]">
             <button onclick="closeAuthModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white font-bold">✕</button>
             <div class="text-center mb-6">
-                <h2 id="modalTitle" class="text-3xl font-extrabold tracking-tighter">Client Login</h2>
-                <p id="modalSubtitle" class="text-slate-400 text-sm mt-1">Access your project workspace</p>
+                <h2 id="modalTitle" class="text-3xl font-extrabold tracking-tighter">Portal Access</h2>
+                <p id="modalSubtitle" class="text-slate-400 text-sm mt-1">Login as client or administrator</p>
             </div>
-
             <div id="modalError" class="hidden mb-4 p-3 bg-red-500/20 border border-red-500 text-red-300 text-sm rounded-xl text-center"></div>
-
             <form id="modalAuthForm" class="space-y-4">
                 <div id="modalNameBox" class="hidden">
                     <label class="block text-sm font-medium mb-1">Full Name</label>
@@ -146,7 +191,6 @@
                 </div>
                 <button type="submit" id="modalSubmitBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-xl font-bold transition">Sign In</button>
             </form>
-
             <p class="text-center text-slate-400 text-sm mt-6">
                 <span id="modalToggleText">Don't have an account?</span> 
                 <button type="button" onclick="toggleModalMode()" class="text-indigo-400 font-bold hover:underline ml-1">Sign up</button>
@@ -167,29 +211,41 @@
     })();
     </script>
 
-    <!-- App Logic Script -->
+    <!-- Script Logic -->
     <script>
         let isSignup = false;
+        const ADMIN_EMAIL = "mahmoodoffice9@gmail.com";
 
         function checkAuthUI() {
-            const activeUser = localStorage.getItem('apex_active_user');
+            const activeUser = JSON.parse(localStorage.getItem('apex_active_session'));
             const navMenu = document.getElementById('navMenu');
             
             if (activeUser) {
-                // Logged in header view
-                navMenu.innerHTML = `
-                    <button onclick="showPortalView()" class="px-5 py-2 text-sm font-medium text-indigo-400 hover:underline transition">Client Portal</button>
-                    <div class="bg-indigo-900/30 px-4 py-2 rounded-full border border-indigo-500/30 text-sm font-bold">
-                        👤 ${activeUser}
-                    </div>
-                    <button onclick="logout()" class="px-4 py-2 text-sm bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 rounded-full transition">Logout</button>
-                `;
+                if (activeUser.email === ADMIN_EMAIL) {
+                    // Admin Header
+                    navMenu.innerHTML = `
+                        <button onclick="showAdminView()" class="px-4 py-2 text-sm font-semibold text-indigo-400 hover:underline">Admin Panel</button>
+                        <div class="bg-indigo-900/30 px-4 py-2 rounded-full border border-indigo-500/30 text-sm font-bold">🛠️ Admin</div>
+                        <button onclick="logout()" class="px-4 py-2 text-sm bg-red-500/10 text-red-400 border border-red-500/30 rounded-full">Logout</button>
+                    `;
+                    showAdminView();
+                } else {
+                    // Client Header
+                    navMenu.innerHTML = `
+                        <button onclick="showPortalView()" class="px-4 py-2 text-sm font-medium text-indigo-400">Client Portal</button>
+                        <div class="bg-indigo-900/30 px-4 py-2 rounded-full border border-indigo-500/30 text-sm font-bold">👤 ${activeUser.name}</div>
+                        <button onclick="logout()" class="px-4 py-2 text-sm bg-red-500/10 text-red-400 border border-red-500/30 rounded-full">Logout</button>
+                    `;
+                    showPortalView();
+                }
             } else {
-                // Logged out header view
                 navMenu.innerHTML = `
                     <button onclick="openAuthModal()" class="px-5 py-2 text-sm font-medium hover:text-indigo-400 transition cursor-pointer">Client Portal</button>
                     <button onclick="Tawk_API.maximize()" class="px-6 py-2 border border-slate-800 rounded-full text-sm font-medium hover:bg-slate-900 transition cursor-pointer">Contact Us</button>
                 `;
+                document.getElementById('mainContent').classList.remove('hidden');
+                document.getElementById('portalSection').classList.add('hidden');
+                document.getElementById('adminSection').classList.add('hidden');
             }
         }
 
@@ -208,14 +264,14 @@
             document.getElementById('modalError').classList.add('hidden');
             if (isSignup) {
                 document.getElementById('modalTitle').innerText = "Create Account";
-                document.getElementById('modalSubtitle').innerText = "Register for project tracking";
+                document.getElementById('modalSubtitle').innerText = "Register for portal access";
                 document.getElementById('modalNameBox').classList.remove('hidden');
                 document.getElementById('modalSubmitBtn').innerText = "Sign Up";
                 document.getElementById('modalToggleText').innerText = "Already have an account?";
                 event.target.innerText = "Sign In";
             } else {
-                document.getElementById('modalTitle').innerText = "Client Login";
-                document.getElementById('modalSubtitle').innerText = "Access your project workspace";
+                document.getElementById('modalTitle').innerText = "Portal Access";
+                document.getElementById('modalSubtitle').innerText = "Login as client or admin";
                 document.getElementById('modalNameBox').classList.add('hidden');
                 document.getElementById('modalSubmitBtn').innerText = "Sign In";
                 document.getElementById('modalToggleText').innerText = "Don't have an account?";
@@ -223,80 +279,122 @@
             }
         }
 
-        // Form Submit Logic with Validation
         document.getElementById('modalAuthForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const email = document.getElementById('mEmail').value.trim();
+            const email = document.getElementById('mEmail').value.trim().toLowerCase();
             const password = document.getElementById('mPassword').value.trim();
             const errBox = document.getElementById('modalError');
             errBox.classList.add('hidden');
 
             if (isSignup) {
                 const name = document.getElementById('mName').value.trim();
-                if (!name) {
-                    errBox.innerText = "Please enter your full name.";
-                    errBox.classList.remove('hidden');
-                    return;
-                }
-                if (localStorage.getItem('apex_user_' + email)) {
-                    errBox.innerText = "Email already exists! Please login.";
-                    errBox.classList.remove('hidden');
-                    return;
-                }
+                if (!name) { errBox.innerText = "Enter your full name."; errBox.classList.remove('hidden'); return; }
+                if (localStorage.getItem('apex_user_' + email)) { errBox.innerText = "Email already registered!"; errBox.classList.remove('hidden'); return; }
+                
                 const userData = { name, email, password };
                 localStorage.setItem('apex_user_' + email, JSON.stringify(userData));
-                localStorage.setItem('apex_active_user', name);
+                localStorage.setItem('apex_active_session', JSON.stringify(userData));
             } else {
-                const savedUser = JSON.parse(localStorage.getItem('apex_user_' + email));
-                if (!savedUser) {
-                    errBox.innerText = "Account not found! Please sign up.";
-                    errBox.classList.remove('hidden');
-                    return;
+                if (email === ADMIN_EMAIL) {
+                    // Direct Admin bypass password or set standard password check
+                    const adminData = { name: "Mahmood Admin", email: ADMIN_EMAIL, password: password };
+                    localStorage.setItem('apex_active_session', JSON.stringify(adminData));
+                } else {
+                    const savedUser = JSON.parse(localStorage.getItem('apex_user_' + email));
+                    if (!savedUser || savedUser.password !== password) {
+                        errBox.innerText = "Invalid Email or Password!";
+                        errBox.classList.remove('hidden');
+                        return;
+                    }
+                    localStorage.setItem('apex_active_session', JSON.stringify(savedUser));
                 }
-                if (savedUser.password !== password) {
-                    errBox.innerText = "Incorrect password! Try again.";
-                    errBox.classList.remove('hidden');
-                    return;
-                }
-                localStorage.setItem('apex_active_user', savedUser.name);
             }
 
             closeAuthModal();
             checkAuthUI();
-            showPortalView();
         });
 
         function showPortalView() {
             document.getElementById('mainContent').classList.add('hidden');
+            document.getElementById('adminSection').classList.add('hidden');
             document.getElementById('portalSection').classList.remove('hidden');
         }
 
-        function switchTab(tabName) {
-            document.querySelectorAll('.portal-tab').forEach(el => el.classList.add('hidden'));
-            document.getElementById('tabBtnProjects').className = "px-6 py-2 rounded-xl font-bold bg-white/5 text-slate-400 hover:text-white transition";
-            document.getElementById('tabBtnPayments').className = "px-6 py-2 rounded-xl font-bold bg-white/5 text-slate-400 hover:text-white transition";
-            document.getElementById('tabBtnDeadlines').className = "px-6 py-2 rounded-xl font-bold bg-white/5 text-slate-400 hover:text-white transition";
-
-            if (tabName === 'projects') {
-                document.getElementById('tabProjects').classList.remove('hidden');
-                document.getElementById('tabBtnProjects').className = "px-6 py-2 rounded-xl font-bold bg-indigo-600 text-white transition";
-            } else if (tabName === 'payments') {
-                document.getElementById('tabPayments').classList.remove('hidden');
-                document.getElementById('tabBtnPayments').className = "px-6 py-2 rounded-xl font-bold bg-indigo-600 text-white transition";
-            } else if (tabName === 'deadlines') {
-                document.getElementById('tabDeadlines').classList.remove('hidden');
-                document.getElementById('tabBtnDeadlines').className = "px-6 py-2 rounded-xl font-bold bg-indigo-600 text-white transition";
-            }
+        function showAdminView() {
+            document.getElementById('mainContent').classList.add('hidden');
+            document.getElementById('portalSection').classList.add('hidden');
+            document.getElementById('adminSection').classList.remove('hidden');
+            loadAdminProjects();
         }
 
         function logout() {
-            localStorage.removeItem('apex_active_user');
+            localStorage.removeItem('apex_active_session');
             checkAuthUI();
-            document.getElementById('portalSection').classList.add('hidden');
-            document.getElementById('mainContent').classList.remove('hidden');
         }
 
-        // Run on page load
+        // Admin Project Management Logic
+        document.getElementById('addProjectForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newProj = {
+                id: Date.now(),
+                name: document.getElementById('pName').value,
+                client: document.getElementById('pClient').value,
+                start: document.getElementById('pStart').value,
+                deadline: document.getElementById('pDeadline').value,
+                amount: document.getElementById('pAmount').value,
+                status: document.getElementById('pStatus').value
+            };
+
+            let projects = JSON.parse(localStorage.getItem('apex_admin_projects') || '[]');
+            projects.push(newProj);
+            localStorage.setItem('apex_admin_projects', JSON.stringify(projects));
+
+            document.getElementById('addProjectForm').reset();
+            loadAdminProjects();
+        });
+
+        function loadAdminProjects() {
+            const projects = JSON.parse(localStorage.getItem('apex_admin_projects') || '[]');
+            const tableBody = document.getElementById('adminProjectsTable');
+            tableBody.innerHTML = '';
+
+            let lockedCount = 0;
+            let deliveredCount = 0;
+
+            projects.forEach(p => {
+                if (p.status === 'Locked') lockedCount++;
+                if (p.status === 'Delivered') deliveredCount++;
+
+                tableBody.innerHTML += `
+                    <tr class="hover:bg-white/5">
+                        <td class="py-3 px-4 font-bold">${p.name}</td>
+                        <td class="py-3 px-4 text-slate-300">${p.client}</td>
+                        <td class="py-3 px-4 text-slate-400 text-xs">${p.start}</td>
+                        <td class="py-3 px-4 text-slate-400 text-xs">${p.deadline}</td>
+                        <td class="py-3 px-4 text-indigo-400 font-semibold">$${p.amount}</td>
+                        <td class="py-3 px-4">
+                            <span class="px-2.5 py-1 rounded-full text-xs border ${p.status === 'Locked' ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' : 'bg-purple-500/20 text-purple-300 border-purple-500/30'}">${p.status}</span>
+                        </td>
+                        <td class="py-3 px-4">
+                            <button onclick="deleteProject(${p.id})" class="text-red-400 hover:text-red-300 text-xs bg-red-500/10 px-2.5 py-1 rounded-lg border border-red-500/20">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // Update top counters dynamically
+            document.getElementById('statLockedToday').innerText = lockedCount;
+            document.getElementById('statDeliveredToday').innerText = deliveredCount;
+            document.getElementById('statDeals').innerText = lockedCount + deliveredCount;
+        }
+
+        function deleteProject(id) {
+            let projects = JSON.parse(localStorage.getItem('apex_admin_projects') || '[]');
+            projects = projects.filter(p => p.id !== id);
+            localStorage.setItem('apex_admin_projects', JSON.stringify(projects));
+            loadAdminProjects();
+        }
+
         window.onload = checkAuthUI;
     </script>
 </body>
