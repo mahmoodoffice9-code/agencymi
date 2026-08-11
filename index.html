@@ -21,7 +21,7 @@
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] hero-glow pointer-events-none -z-10"></div>
 
     <!-- Header / Navbar -->
-    <nav class="sticky top-0 z-40 bg-[#030712]/80 backdrop-blur-md border-b border-white/5 px-6 lg:px-12 py-4 max-w-7xl mx-auto flex justify-between items-center">
+    <nav class="sticky top-0 z-40 bg-[#030712]/85 backdrop-blur-md border-b border-white/5 px-6 lg:px-12 py-4 max-w-7xl mx-auto flex justify-between items-center">
         <div class="text-2xl font-extrabold tracking-tight cursor-pointer flex items-center gap-2" onclick="showMainView()">
             <span class="bg-indigo-600 text-white p-1.5 rounded-xl text-lg font-bold shadow-lg shadow-indigo-500/30">⚡</span>
             APEX<span class="text-indigo-400">.</span>AI
@@ -59,7 +59,7 @@
             </div>
         </section>
 
-        <!-- Stats Counter Ribbon (Marketed Projections 😉) -->
+        <!-- Stats Counter Ribbon (Updated Metrics) -->
         <section class="max-w-6xl mx-auto px-6 py-10">
             <div class="glass-card grid grid-cols-2 md:grid-cols-4 gap-6 p-8 rounded-3xl text-center">
                 <div>
@@ -67,12 +67,12 @@
                     <p class="text-slate-400 text-xs mt-1 uppercase tracking-wider font-medium">Token Efficiency</p>
                 </div>
                 <div>
-                    <h3 class="text-3xl md:text-4xl font-extrabold text-cyan-400">150+</h3>
-                    <p class="text-slate-400 text-xs mt-1 uppercase tracking-wider font-medium">AI Agents Deployed</p>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-cyan-400">45+</h3>
+                    <p class="text-slate-400 text-xs mt-1 uppercase tracking-wider font-medium">Custom Workflows</p>
                 </div>
                 <div>
-                    <h3 class="text-3xl md:text-4xl font-extrabold text-emerald-400">$4.2M</h3>
-                    <p class="text-slate-400 text-xs mt-1 uppercase tracking-wider font-medium">Client ROI Generated</p>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-emerald-400">0.4s</h3>
+                    <p class="text-slate-400 text-xs mt-1 uppercase tracking-wider font-medium">Avg API Latency</p>
                 </div>
                 <div>
                     <h3 class="text-3xl md:text-4xl font-extrabold text-purple-400">24/7</h3>
@@ -127,7 +127,7 @@
             </div>
         </section>
 
-        <!-- Case Studies & Client Reviews Section (6 Case Studies with Mixed Ratings) -->
+        <!-- Case Studies & Client Reviews Section -->
         <section id="case-studies" class="max-w-7xl mx-auto px-6 py-20 border-t border-white/5">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">Client Case Studies & <span class="gradient-text">Success Stories</span></h2>
@@ -195,7 +195,7 @@
                     </div>
                 </div>
 
-                <!-- Case Study 4: Rating 3.4 (Relatable raw feedback!) -->
+                <!-- Case Study 4: Rating 3.4 -->
                 <div class="glass-card p-8 rounded-3xl flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-center mb-4">
@@ -572,7 +572,6 @@
             closeAuthModal();
             checkAuthUI();
             
-            // Redirect right away to portal after successful login
             const activeUser = JSON.parse(localStorage.getItem('apex_active_session'));
             if (activeUser.email === ADMIN_EMAIL) {
                 showAdminView();
