@@ -50,12 +50,12 @@
                 We engineer elite custom LLMs, intelligent multi-agent workflows, and advanced API architectures designed to multiply your revenue and automate operations. 🚀
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="#services" class="glow-button bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-2xl font-bold transition flex items-center gap-2">
+                <button onclick="handleStartProjectClick()" class="glow-button bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-2xl font-bold transition flex items-center gap-2 cursor-pointer">
+                    Start Project / Live Chat 💬
+                </button>
+                <a href="#services" class="glass-card hover:bg-white/5 text-slate-200 px-8 py-4 rounded-2xl font-bold transition">
                     Explore Our Expertise 💡
                 </a>
-                <button onclick="openAuthModal()" class="glass-card hover:bg-white/5 text-slate-200 px-8 py-4 rounded-2xl font-bold transition">
-                    Client Portal Login 🔒
-                </button>
             </div>
         </section>
 
@@ -477,23 +477,35 @@
             if (activeUser) {
                 if (activeUser.email === ADMIN_EMAIL) {
                     navMenu.innerHTML = `
-                        <button onclick="showAdminView()" class="px-4 py-2 text-sm font-semibold text-indigo-400 hover:underline">Admin Panel</button>
+                        <button onclick="showAdminView()" class="px-4 py-2 text-sm font-semibold text-indigo-400 hover:underline cursor-pointer">Admin Panel</button>
                         <div class="bg-indigo-900/30 px-4 py-2 rounded-full border border-indigo-500/30 text-sm font-bold">🛠️ Admin</div>
-                        <button onclick="logout()" class="px-4 py-2 text-sm bg-red-500/10 text-red-400 border border-red-500/30 rounded-full">Logout</button>
+                        <button onclick="logout()" class="px-4 py-2 text-sm bg-red-500/10 text-red-400 border border-red-500/30 rounded-full cursor-pointer">Logout</button>
                     `;
                 } else {
                     navMenu.innerHTML = `
-                        <button onclick="showPortalView()" class="px-4 py-2 text-sm font-medium text-indigo-400">Client Portal & Chat</button>
+                        <button onclick="showPortalView()" class="px-4 py-2 text-sm font-medium text-indigo-400 cursor-pointer">Start Project / Chat 💬</button>
                         <div class="bg-indigo-900/30 px-4 py-2 rounded-full border border-indigo-500/30 text-sm font-bold">👤 ${activeUser.name}</div>
-                        <button onclick="logout()" class="px-4 py-2 text-sm bg-red-500/10 text-red-400 border border-red-500/30 rounded-full">Logout</button>
+                        <button onclick="logout()" class="px-4 py-2 text-sm bg-red-500/10 text-red-400 border border-red-500/30 rounded-full cursor-pointer">Logout</button>
                     `;
                 }
-                showMainView();
             } else {
                 navMenu.innerHTML = `
-                    <button onclick="openAuthModal()" class="px-5 py-2 text-sm font-medium hover:text-indigo-400 transition cursor-pointer">Client Portal</button>
+                    <button onclick="handleStartProjectClick()" class="px-4 py-2 text-sm font-medium text-indigo-400 hover:text-indigo-300 transition cursor-pointer">Start Project / Chat 💬</button>
+                    <button onclick="openAuthModal()" class="px-4 py-2 text-sm font-medium hover:text-indigo-400 transition cursor-pointer">Login</button>
                 `;
-                showMainView();
+            }
+        }
+
+        function handleStartProjectClick() {
+            const activeUser = JSON.parse(localStorage.getItem('apex_active_session'));
+            if (activeUser) {
+                if (activeUser.email === ADMIN_EMAIL) {
+                    showAdminView();
+                } else {
+                    showPortalView();
+                }
+            } else {
+                openAuthModal();
             }
         }
 
@@ -559,6 +571,14 @@
 
             closeAuthModal();
             checkAuthUI();
+            
+            // Redirect right away to portal after successful login
+            const activeUser = JSON.parse(localStorage.getItem('apex_active_session'));
+            if (activeUser.email === ADMIN_EMAIL) {
+                showAdminView();
+            } else {
+                showPortalView();
+            }
         });
 
         function showMainView() {
@@ -587,6 +607,7 @@
         function logout() {
             localStorage.removeItem('apex_active_session');
             checkAuthUI();
+            showMainView();
         }
 
         // --- CHAT SYSTEM LOGIC (Supabase) ---
@@ -660,7 +681,7 @@
 
             emails.forEach(email => {
                 clientListDiv.innerHTML += `
-                    <button onclick="selectAdminClient('${email}')" class="w-full text-left p-3 rounded-xl hover:bg-white/5 transition flex items-center justify-between border border-white/5">
+                    <button onclick="selectAdminClient('${email}')" class="w-full text-left p-3 rounded-xl hover:bg-white/5 transition flex items-center justify-between border border-white/5 cursor-pointer">
                         <span class="text-xs font-bold text-slate-300 truncate">${email}</span>
                         <span class="text-[10px] bg-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded">Chat</span>
                     </button>
@@ -778,7 +799,7 @@
                             <span class="px-2.5 py-1 rounded-full text-xs border ${p.status === 'Locked' ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' : 'bg-purple-500/20 text-purple-300 border-purple-500/30'}">${p.status}</span>
                         </td>
                         <td class="py-3 px-4">
-                            <button onclick="deleteProject(${p.id})" class="text-red-400 hover:text-red-300 text-xs bg-red-500/10 px-2.5 py-1 rounded-lg border border-red-500/20">Delete</button>
+                            <button onclick="deleteProject(${p.id})" class="text-red-400 hover:text-red-300 text-xs bg-red-500/10 px-2.5 py-1 rounded-lg border border-red-500/25 cursor-pointer">Delete</button>
                         </td>
                     </tr>
                 `;
