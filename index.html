@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apex AI Integration | Intelligent Automation Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Supabase JS Library Added -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
@@ -65,11 +64,27 @@
         </section>
     </div>
 
-    <!-- Client Portal Section -->
-    <div id="portalSection" class="hidden max-w-6xl mx-auto px-6 py-12">
-        <h2 class="text-3xl font-bold mb-6">Client Dashboard</h2>
-        <div class="glass-card p-6 rounded-2xl">
-            <p class="text-slate-300">Welcome to your project portal. Your active deliverables and milestones are synced.</p>
+    <!-- Client Portal Section (Includes Live Chat Tab) -->
+    <div id="portalSection" class="hidden max-w-6xl mx-auto px-6 py-12 space-y-6">
+        <div class="flex justify-between items-center">
+            <h2 class="text-3xl font-bold">Client Dashboard & Support</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="glass-card p-6 rounded-2xl md:col-span-1">
+                <h3 class="font-bold text-lg mb-2">Project Status</h3>
+                <p class="text-slate-300 text-sm">Your deliverables are in progress. Connect with support via live chat for instant updates.</p>
+            </div>
+            <!-- Live Chat Box for Client -->
+            <div class="glass-card p-6 rounded-2xl md:col-span-2 flex flex-col h-[400px]">
+                <h3 class="font-bold text-lg mb-4 text-indigo-400">💬 Direct Support Chat</h3>
+                <div id="chatMessages" class="flex-1 overflow-y-auto space-y-3 mb-4 pr-2 text-sm">
+                    <!-- Messages will load here -->
+                </div>
+                <form id="chatForm" class="flex gap-2">
+                    <input type="text" id="chatInput" required placeholder="Type your message here..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm outline-none focus:border-indigo-500">
+                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 px-6 rounded-xl font-bold transition">Send 🚀</button>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -89,7 +104,7 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div class="glass-card p-6 rounded-2xl">
                 <h3 class="text-slate-400 text-xs uppercase tracking-wider">Msgs Today</h3>
-                <p id="statMsgs" class="text-3xl font-extrabold mt-2 text-cyan-400">14</p>
+                <p id="statMsgs" class="text-3xl font-extrabold mt-2 text-cyan-400">0</p>
             </div>
             <div class="glass-card p-6 rounded-2xl">
                 <h3 class="text-slate-400 text-xs uppercase tracking-wider">Deals Closed Today</h3>
@@ -102,6 +117,28 @@
             <div class="glass-card p-6 rounded-2xl">
                 <h3 class="text-slate-400 text-xs uppercase tracking-wider">Projects Delivered</h3>
                 <p id="statDeliveredToday" class="text-3xl font-extrabold mt-2 text-purple-400">1</p>
+            </div>
+        </div>
+
+        <!-- Admin Live Chats Section -->
+        <div class="glass-card p-8 rounded-[2rem]">
+            <h3 class="text-xl font-bold mb-4">💬 Live Client Chats</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Client Chat List Sidebar -->
+                <div id="adminClientList" class="space-y-2 border-r border-white/10 pr-4 max-h-[350px] overflow-y-auto">
+                    <!-- Dynamic client list -->
+                </div>
+                <!-- Selected Client Conversation -->
+                <div class="md:col-span-2 flex flex-col h-[350px]">
+                    <h4 id="activeChatTitle" class="font-bold text-indigo-400 mb-2">Select a client to chat</h4>
+                    <div id="adminChatMessages" class="flex-1 overflow-y-auto space-y-3 mb-4 pr-2 text-sm bg-slate-950/40 p-4 rounded-xl border border-white/5">
+                        <p class="text-slate-500 text-center mt-20">No conversation selected.</p>
+                    </div>
+                    <form id="adminChatForm" class="hidden flex gap-2">
+                        <input type="text" id="adminChatInput" required placeholder="Type reply as admin..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm outline-none focus:border-indigo-500">
+                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 px-6 rounded-xl font-bold transition">Reply ⚡</button>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -197,10 +234,15 @@
         </div>
     </div>
 
-    <!-- Script Logic -->
+    <!-- Script Logic & Supabase Integration -->
     <script>
+        const SUPABASE_URL = "https://kfpwbsjudktvupmicutn.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_eXirMUXywjoQHSmJlPaRyA_OtiZYJxf";
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
         let isSignup = false;
         const ADMIN_EMAIL = "mahmoodoffice9@gmail.com";
+        let activeSelectedClient = null;
 
         function checkAuthUI() {
             const activeUser = JSON.parse(localStorage.getItem('apex_active_session'));
@@ -216,7 +258,7 @@
                     showAdminView();
                 } else {
                     navMenu.innerHTML = `
-                        <button onclick="showPortalView()" class="px-4 py-2 text-sm font-medium text-indigo-400">Client Portal</button>
+                        <button onclick="showPortalView()" class="px-4 py-2 text-sm font-medium text-indigo-400">Client Portal & Chat</button>
                         <div class="bg-indigo-900/30 px-4 py-2 rounded-full border border-indigo-500/30 text-sm font-bold">👤 ${activeUser.name}</div>
                         <button onclick="logout()" class="px-4 py-2 text-sm bg-red-500/10 text-red-400 border border-red-500/30 rounded-full">Logout</button>
                     `;
@@ -300,6 +342,8 @@
             document.getElementById('mainContent').classList.add('hidden');
             document.getElementById('adminSection').classList.add('hidden');
             document.getElementById('portalSection').classList.remove('hidden');
+            loadClientMessages();
+            listenRealtimeMessages();
         }
 
         function showAdminView() {
@@ -307,6 +351,8 @@
             document.getElementById('portalSection').classList.add('hidden');
             document.getElementById('adminSection').classList.remove('hidden');
             loadAdminProjects();
+            loadAdminClientsList();
+            listenRealtimeMessages();
         }
 
         function logout() {
@@ -314,6 +360,152 @@
             checkAuthUI();
         }
 
+        // --- CHAT SYSTEM LOGIC (Supabase) ---
+        async function loadClientMessages() {
+            const activeUser = JSON.parse(localStorage.getItem('apex_active_session'));
+            if (!activeUser) return;
+
+            const { data, error } = await supabaseClient
+                .from('messages')
+                .select('*')
+                .or(`sender.eq.${activeUser.email},receiver.eq.${activeUser.email}`)
+                .order('created_at', { ascending: true });
+
+            const chatBox = document.getElementById('chatMessages');
+            chatBox.innerHTML = '';
+
+            if (data) {
+                data.forEach(m => {
+                    const isMe = m.sender === activeUser.email;
+                    chatBox.innerHTML += `
+                        <div class="flex flex-col ${isMe ? 'items-end' : 'items-start'}">
+                            <div class="max-w-[80%] p-3 rounded-xl text-sm ${isMe ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-200'}">
+                                ${m.message}
+                            </div>
+                            <span class="text-[10px] text-slate-500 mt-1">${new Date(m.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                        </div>
+                    `;
+                });
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+
+        document.getElementById('chatForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const activeUser = JSON.parse(localStorage.getItem('apex_active_session'));
+            const textInput = document.getElementById('chatInput');
+            const message = textInput.value.trim();
+            if (!message || !activeUser) return;
+
+            const { error } = await supabaseClient.from('messages').insert([
+                { sender: activeUser.email, receiver: ADMIN_EMAIL, message: message }
+            ]);
+
+            if (!error) {
+                textInput.value = '';
+                loadClientMessages();
+            }
+        });
+
+        // Admin Chat Logic
+        async function loadAdminClientsList() {
+            const { data, error } = await supabaseClient.from('messages').select('*');
+            if (!data) return;
+
+            const clientsMap = {};
+            data.forEach(m => {
+                const clientEmail = m.sender === ADMIN_EMAIL ? m.receiver : m.sender;
+                if (clientEmail !== ADMIN_EMAIL) {
+                    clientsMap[clientEmail] = true;
+                }
+            });
+
+            const clientListDiv = document.getElementById('adminClientList');
+            clientListDiv.innerHTML = '';
+
+            const emails = Object.keys(clientsMap);
+            if (emails.length === 0) {
+                clientListDiv.innerHTML = `<p class="text-slate-500 text-xs">No client messages yet.</p>`;
+                return;
+            }
+
+            emails.forEach(email => {
+                clientListDiv.innerHTML += `
+                    <button onclick="selectAdminClient('${email}')" class="w-full text-left p-3 rounded-xl hover:bg-white/5 transition flex items-center justify-between border border-white/5">
+                        <span class="text-xs font-bold text-slate-300 truncate">${email}</span>
+                        <span class="text-[10px] bg-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded">Chat</span>
+                    </button>
+                `;
+            });
+        }
+
+        async function selectAdminClient(clientEmail) {
+            activeSelectedClient = clientEmail;
+            document.getElementById('activeChatTitle').innerText = "Chat with: " + clientEmail;
+            document.getElementById('adminChatForm').classList.remove('hidden');
+
+            const { data, error } = await supabaseClient
+                .from('messages')
+                .select('*')
+                .or(`and(sender.eq.${ADMIN_EMAIL},receiver.eq.${clientEmail}),and(sender.eq.${clientEmail},receiver.eq.${ADMIN_EMAIL})`)
+                .order('created_at', { ascending: true });
+
+            const adminChatBox = document.getElementById('adminChatMessages');
+            adminChatBox.innerHTML = '';
+
+            if (data) {
+                data.forEach(m => {
+                    const isMe = m.sender === ADMIN_EMAIL;
+                    adminChatBox.innerHTML += `
+                        <div class="flex flex-col ${isMe ? 'items-end' : 'items-start'}">
+                            <div class="max-w-[80%] p-3 rounded-xl text-sm ${isMe ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-200'}">
+                                ${m.message}
+                            </div>
+                            <span class="text-[10px] text-slate-500 mt-1">${new Date(m.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                        </div>
+                    `;
+                });
+                adminChatBox.scrollTop = adminChatBox.scrollHeight;
+            }
+        }
+
+        document.getElementById('adminChatForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (!activeSelectedClient) return;
+
+            const textInput = document.getElementById('adminChatInput');
+            const message = textInput.value.trim();
+            if (!message) return;
+
+            const { error } = await supabaseClient.from('messages').insert([
+                { sender: ADMIN_EMAIL, receiver: activeSelectedClient, message: message }
+            ]);
+
+            if (!error) {
+                textInput.value = '';
+                selectAdminClient(activeSelectedClient);
+            }
+        });
+
+        // Realtime Listener for Live Updates
+        function listenRealtimeMessages() {
+            supabaseClient
+                .channel('public:messages')
+                .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, payload => {
+                    const activeUser = JSON.parse(localStorage.getItem('apex_active_session'));
+                    if (!activeUser) return;
+
+                    if (activeUser.email === ADMIN_EMAIL) {
+                        loadAdminClientsList();
+                        if (activeSelectedClient) selectAdminClient(activeSelectedClient);
+                    } else {
+                        loadClientMessages();
+                    }
+                })
+                .subscribe();
+        }
+
+        // Admin Project Management Logic
         document.getElementById('addProjectForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const newProj = {
