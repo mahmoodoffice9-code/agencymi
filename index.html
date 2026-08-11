@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apex AI Integration | Intelligent Automation Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase JS Library Added -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #050505; }
@@ -38,9 +40,6 @@
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <button onclick="openAuthModal()" class="glow-button bg-indigo-600 hover:bg-indigo-500 px-8 py-4 rounded-2xl font-bold transition cursor-pointer">
                     Client Portal / Login ⚡
-                </button>
-                <button onclick="Tawk_API.maximize()" class="px-8 py-4 rounded-2xl border border-white/10 hover:bg-white/5 transition font-medium cursor-pointer">
-                    Live Chat Support 💬
                 </button>
             </div>
         </section>
@@ -198,36 +197,6 @@
         </div>
     </div>
 
-    <!-- Modified Tawk.to Script & Chat Interceptor -->
-    <script type="text/javascript">
-    var Tawk_API = Tawk_API || {};
-    var Tawk_LoadStart = new Date();
-
-    // Jab bhi user chat open karne ki koshish kare
-    Tawk_API.onBeforeMaximize = function() {
-        const activeUser = JSON.parse(localStorage.getItem('apex_active_session'));
-        
-        if (!activeUser) {
-            // Agar login nahi hai, toh chat rok do aur login modal khol do
-            openAuthModal();
-            const errBox = document.getElementById('modalError');
-            errBox.innerText = "Please login or sign up first to start chatting with our experts! 💬";
-            errBox.classList.remove('hidden');
-            return false; // Chat widget ko khulne se rok dega
-        }
-        return true; // Agar login hai toh chat khul jayegi
-    };
-
-    (function(){
-    var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-    s1.async = true;
-    s1.src = 'https://embed.tawk.to/6a7a58136f4cb41d46e4b0d1/1jvmug3ne';
-    s1.charset = 'UTF8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
-    </script>
-
     <!-- Script Logic -->
     <script>
         let isSignup = false;
@@ -239,7 +208,6 @@
             
             if (activeUser) {
                 if (activeUser.email === ADMIN_EMAIL) {
-                    // Admin Header
                     navMenu.innerHTML = `
                         <button onclick="showAdminView()" class="px-4 py-2 text-sm font-semibold text-indigo-400 hover:underline">Admin Panel</button>
                         <div class="bg-indigo-900/30 px-4 py-2 rounded-full border border-indigo-500/30 text-sm font-bold">🛠️ Admin</div>
@@ -247,7 +215,6 @@
                     `;
                     showAdminView();
                 } else {
-                    // Client Header
                     navMenu.innerHTML = `
                         <button onclick="showPortalView()" class="px-4 py-2 text-sm font-medium text-indigo-400">Client Portal</button>
                         <div class="bg-indigo-900/30 px-4 py-2 rounded-full border border-indigo-500/30 text-sm font-bold">👤 ${activeUser.name}</div>
@@ -258,7 +225,6 @@
             } else {
                 navMenu.innerHTML = `
                     <button onclick="openAuthModal()" class="px-5 py-2 text-sm font-medium hover:text-indigo-400 transition cursor-pointer">Client Portal</button>
-                    <button onclick="Tawk_API.maximize()" class="px-6 py-2 border border-slate-800 rounded-full text-sm font-medium hover:bg-slate-900 transition cursor-pointer">Contact Us</button>
                 `;
                 document.getElementById('mainContent').classList.remove('hidden');
                 document.getElementById('portalSection').classList.add('hidden');
@@ -348,7 +314,6 @@
             checkAuthUI();
         }
 
-        // Admin Project Management Logic
         document.getElementById('addProjectForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const newProj = {
