@@ -28,6 +28,7 @@
         </div>
         <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
             <a href="#services" class="hover:text-indigo-400 transition">Services & Skills</a>
+            <a href="#pricing" class="hover:text-indigo-400 transition">Pricing Plans</a>
             <a href="#case-studies" class="hover:text-indigo-400 transition">Case Studies</a>
             <a href="#about" class="hover:text-indigo-400 transition">About Agency</a>
         </div>
@@ -53,13 +54,13 @@
                 <button onclick="handleStartProjectClick()" class="glow-button bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-2xl font-bold transition flex items-center gap-2 cursor-pointer">
                     Start Project / Live Chat 💬
                 </button>
-                <a href="#services" class="glass-card hover:bg-white/5 text-slate-200 px-8 py-4 rounded-2xl font-bold transition">
-                    Explore Our Expertise 💡
+                <a href="#pricing" class="glass-card hover:bg-white/5 text-slate-200 px-8 py-4 rounded-2xl font-bold transition">
+                    View Pricing Plans 💎
                 </a>
             </div>
         </section>
 
-        <!-- Stats Counter Ribbon (Updated Metrics) -->
+        <!-- Stats Counter Ribbon -->
         <section class="max-w-6xl mx-auto px-6 py-10">
             <div class="glass-card grid grid-cols-2 md:grid-cols-4 gap-6 p-8 rounded-3xl text-center">
                 <div>
@@ -92,7 +93,7 @@
                 <!-- Skill 1 -->
                 <div class="glass-card p-8 rounded-3xl relative overflow-hidden group">
                     <div class="text-4xl mb-6 p-4 bg-indigo-500/10 w-fit rounded-2xl border border-indigo-500/20">🧠</div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Advanced Prompt Engineering & LLM Tuning</h3>
+                    <h3 class="text-xl font-bold mb-3 text-white">Advanced Prompt Engineering & Model Tuning</h3>
                     <p class="text-slate-400 text-sm leading-relaxed mb-6">Crafting deterministic system prompts, few-shot learning pipelines, and fine-tuning open-source models for specific business logic.</p>
                     <div class="flex flex-wrap gap-2">
                         <span class="text-[11px] bg-indigo-500/10 text-indigo-300 px-3 py-1 rounded-lg border border-indigo-500/20 font-medium">GPT-4o</span>
@@ -123,6 +124,124 @@
                         <span class="text-[11px] bg-purple-500/10 text-purple-300 px-3 py-1 rounded-lg border border-purple-500/20 font-medium">Make.com</span>
                         <span class="text-[11px] bg-purple-500/10 text-purple-300 px-3 py-1 rounded-lg border border-purple-500/20 font-medium">MindStudio</span>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING PLANS SECTION -->
+        <section id="pricing" class="max-w-7xl mx-auto px-6 py-20 border-t border-white/5">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 mb-4 text-xs font-semibold bg-indigo-500/10 text-indigo-300 rounded-full border border-indigo-500/20 uppercase tracking-widest">
+                    Transparent Investment
+                </div>
+                <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">Flexible & Results-Driven <span class="gradient-text">Pricing Tiers</span></h2>
+                <p class="text-slate-400 text-sm md:text-base">Choose a targeted solution or let us architect a complete custom system for your enterprise infrastructure.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Pricing Card 1 -->
+                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between relative group border-indigo-500/30">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-2xl p-3 bg-indigo-500/10 rounded-2xl border border-indigo-500/20">✍️</span>
+                            <span class="text-xs font-bold px-3 py-1 bg-indigo-500/10 text-indigo-300 rounded-full border border-indigo-500/20">Fixed Package</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-1 text-white">Advanced Prompt Engineering & Model Tuning</h3>
+                        <div class="text-3xl font-extrabold text-indigo-400 my-4">$200 <span class="text-xs font-normal text-slate-400">/ project</span></div>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-6 font-medium">
+                            Designed to eliminate hallucinations and secure absolute determinism from AI models for your specific business workflows.
+                        </p>
+                        <div class="space-y-3 mb-8">
+                            <p class="text-xs font-bold text-indigo-300 uppercase tracking-wider">What’s Included:</p>
+                            <ul class="space-y-2.5 text-sm text-slate-300 font-light">
+                                <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>3 Custom, Production-Ready System Prompts</strong> tailored to your exact brand and logic.</span></li>
+                                <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>Strict Output Guardrails</strong> & JSON/Markdown Formatting Control.</span></li>
+                                <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>Few-Shot Learning Examples</strong> setup to ensure precise, repeatable performance.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button onclick="handleStartProjectClick()" class="w-full bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white border border-indigo-500/40 py-3 rounded-xl font-bold transition cursor-pointer text-sm">
+                        Select Package ⚡
+                    </button>
+                </div>
+
+                <!-- Pricing Card 2 (Featured) -->
+                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between relative group border-cyan-500/40 bg-gradient-to-b from-indigo-950/30 via-slate-900/70 to-slate-900/90 shadow-cyan-500/10">
+                    <div class="absolute -top-3 right-8 bg-cyan-500 text-slate-950 text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">
+                        Most Popular 🔥
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-2xl p-3 bg-cyan-500/10 rounded-2xl border border-cyan-500/20">🔌</span>
+                            <span class="text-xs font-bold px-3 py-1 bg-cyan-500/10 text-cyan-300 rounded-full border border-cyan-500/20">Fixed Package</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-1 text-white">LLM Integration & RAG Pipelines</h3>
+                        <div class="text-3xl font-extrabold text-cyan-400 my-4">$500 <span class="text-xs font-normal text-slate-400">/ project</span></div>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-6 font-medium">
+                            Seamlessly bridging state-of-the-art language models (OpenAI, Claude) with your applications, backed by proprietary data storage.
+                        </p>
+                        <div class="space-y-3 mb-8">
+                            <p class="text-xs font-bold text-cyan-300 uppercase tracking-wider">What’s Included:</p>
+                            <ul class="space-y-2.5 text-sm text-slate-300 font-light">
+                                <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>End-to-end API Integration</strong> into your existing web apps, platforms, or workflows.</span></li>
+                                <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>Complete RAG Pipeline</strong> (Retrieval-Augmented Generation) Knowledge Base.</span></li>
+                                <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>Vector Database Setup</strong> and document chunking for precise document querying.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button onclick="handleStartProjectClick()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white py-3 rounded-xl font-bold transition cursor-pointer text-sm shadow-lg shadow-cyan-500/20">
+                        Deploy Integration 🚀
+                    </button>
+                </div>
+
+                <!-- Pricing Card 3 -->
+                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between relative group border-purple-500/30">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-2xl p-3 bg-purple-500/10 rounded-2xl border border-purple-500/20">💰</span>
+                            <span class="text-xs font-bold px-3 py-1 bg-purple-500/10 text-purple-300 rounded-full border border-purple-500/20">Fixed Package</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-1 text-white">API Token Cost & Latency Optimization</h3>
+                        <div class="text-3xl font-extrabold text-purple-400 my-4">$350 <span class="text-xs font-normal text-slate-400">/ project</span></div>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-6 font-medium">
+                            Cutting down bloated operational API expenses and accelerating response speeds without sacrificing output quality.
+                        </p>
+                        <div class="space-y-3 mb-8">
+                            <p class="text-xs font-bold text-purple-300 uppercase tracking-wider">What’s Included:</p>
+                            <ul class="space-y-2.5 text-sm text-slate-300 font-light">
+                                <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>Comprehensive Token Audit</strong> to identify and strip wasteful context & padding.</span></li>
+                                <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>Smart Model Routing</strong> configuration (leveraging cost-effective models).</span></li>
+                                <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>Caching Layer Implementation</strong> to instantly serve frequent queries & cut bills.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button onclick="handleStartProjectClick()" class="w-full bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white border border-purple-500/40 py-3 rounded-xl font-bold transition cursor-pointer text-sm">
+                        Optimize API ⚡
+                    </button>
+                </div>
+            </div>
+
+            <!-- Custom Enterprise Tier Banner -->
+            <div class="mt-8 glass-card p-8 md:p-10 rounded-3xl border border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 bg-gradient-to-r from-indigo-950/40 via-purple-950/30 to-slate-950/60">
+                <div class="space-y-2 max-w-2xl">
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl">🌟</span>
+                        <h3 class="text-xl md:text-2xl font-bold text-white">Need Something Special? Custom & Enterprise Projects</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Have a unique AI architecture, multi-agent system, or a complex custom build in mind? We design scalable, end-to-end AI ecosystems tailored specifically to your unique business model and enterprise requirements.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2 text-xs text-indigo-300 font-medium">
+                        <span>🛡️ Dedicated scoping & architecture design</span>
+                        <span>🚀 Scalable cloud deployments</span>
+                        <span>🔒 Enterprise-grade security</span>
+                    </div>
+                </div>
+                <div class="text-center md:text-right shrink-0">
+                    <div class="text-xl font-bold text-slate-300 mb-3">Custom Quote <span class="text-xs font-normal text-slate-500">(Based on Scope)</span></div>
+                    <button onclick="handleStartProjectClick()" class="glow-button bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-3.5 rounded-xl font-bold transition cursor-pointer text-sm">
+                        Request Custom Quote 💬
+                    </button>
                 </div>
             </div>
         </section>
