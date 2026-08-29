@@ -12,49 +12,68 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030712; color: #f3f4f6; position: relative; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030712; color: #f3f4f6; position: relative; perspective: 1000px; }
         
-        /* Video Background Styling */
-        #bgVideo {
+        /* Pure Code-Generated Animated 3D Cyber Background Canvas */
+        #interactiveBgCanvas {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             z-index: -20;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-            filter: brightness(0.25) contrast(1.2); /* Darkened so content pops */
+            pointer-events: none;
         }
 
-        /* Overlay Gradient for readability */
+        /* Dark Overlay Gradient for maximum text contrast */
         .video-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(3, 7, 18, 0.4) 0%, rgba(3, 7, 18, 0.85) 100%);
+            background: radial-gradient(circle at center, rgba(3, 7, 18, 0.4) 0%, rgba(3, 7, 18, 0.88) 100%);
             z-index: -10;
             pointer-events: none;
         }
 
-        .gradient-text { background: linear-gradient(135deg, #818cf8 0%, #38bdf8 50%, #c084fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glass-card { background: rgba(11, 15, 25, 0.75); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); transition: all 0.4s ease; }
-        .glass-card:hover { border-color: rgba(129, 140, 248, 0.5); transform: translateY(-6px); }
-        .glow-button { box-shadow: 0 0 25px rgba(99, 102, 241, 0.6); }
+        /* 3D Visual Effects for Cards & Buttons */
+        .glass-card { 
+            background: rgba(11, 15, 25, 0.7); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 15px rgba(99, 102, 241, 0.1); 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+        
+        .glass-card:hover { 
+            border-color: rgba(129, 140, 248, 0.6); 
+            transform: translateY(-10px) rotateX(4deg) rotateY(-2deg) scale(1.02); 
+            box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.3), 0 0 25px rgba(56, 189, 248, 0.2);
+        }
+
+        .gradient-text { 
+            background: linear-gradient(135deg, #818cf8 0%, #38bdf8 50%, #c084fc 100%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+
+        .glow-button { 
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.6); 
+            transition: all 0.3s ease;
+        }
+        
+        .glow-button:hover { 
+            box-shadow: 0 0 35px rgba(99, 102, 241, 0.9), 0 0 15px rgba(56, 189, 248, 0.8);
+            transform: scale(1.05) translateY(-2px);
+        }
     </style>
 </head>
 <body class="selection:bg-indigo-500/35 overflow-x-hidden">
 
-    <!-- Background Tech Video -->
-    <video autoplay loop muted playsinline id="bgVideo">
-        <!-- High Quality Tech / Digital Network Loop -->
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-data-41551-large.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
-    </video>
+    <!-- Interactive Code-Generated 3D Background Canvas -->
+    <canvas id="interactiveBgCanvas"></canvas>
 
     <!-- Overlay Layer to maintain contrast -->
     <div class="video-overlay"></div>
@@ -608,7 +627,7 @@
     <!-- AOS Script Library -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
-    <!-- Script Logic & Supabase Integration -->
+    <!-- Script Logic & Interactive Canvas Generator -->
     <script>
         AOS.init({
             duration: 800,
@@ -616,6 +635,92 @@
             mirror: true
         });
 
+        /* --- Pure JS/Canvas 3D Mesh Engine (Generates Realistic Moving Visual Background) --- */
+        const canvas = document.getElementById('interactiveBgCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        let mouseX = canvas.width / 2;
+        let mouseY = canvas.height / 2;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        const particles = [];
+        const particleCount = 65;
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                z: Math.random() * canvas.width,
+                vx: (Math.random() - 0.5) * 1.2,
+                vy: (Math.random() - 0.5) * 1.2,
+                vz: (Math.random() - 0.5) * 1.2,
+                radius: Math.random() * 2 + 1
+            });
+        }
+
+        function animateBgCanvas() {
+            ctx.fillStyle = '#030712';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+
+            for (let i = 0; i < particleCount; i++) {
+                let p = particles[i];
+
+                p.x += p.vx + (mouseX - cx) * 0.00005;
+                p.y += p.vy + (mouseY - cy) * 0.00005;
+                p.z += p.vz;
+
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                if (p.z < 0 || p.z > canvas.width) p.vz *= -1;
+
+                let scale = 300 / (300 + p.z);
+                let x3d = (p.x - cx) * scale + cx;
+                let y3d = (p.y - cy) * scale + cy;
+
+                ctx.beginPath();
+                ctx.arc(x3d, y3d, p.radius * scale, 0, Math.PI * 2);
+                ctx.fillStyle = i % 2 === 0 ? 'rgba(129, 140, 248, 0.7)' : 'rgba(56, 189, 248, 0.7)';
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#6366f1';
+                ctx.fill();
+
+                for (let j = i + 1; j < particleCount; j++) {
+                    let p2 = particles[j];
+                    let scale2 = 300 / (300 + p2.z);
+                    let x3d_2 = (p2.x - cx) * scale2 + cx;
+                    let y3d_2 = (p2.y - cy) * scale2 + cy;
+
+                    let dist = Math.hypot(x3d - x3d_2, y3d - y3d_2);
+
+                    if (dist < 130) {
+                        ctx.beginPath();
+                        ctx.moveTo(x3d, y3d);
+                        ctx.lineTo(x3d_2, y3d_2);
+                        ctx.strokeStyle = `rgba(99, 102, 241, ${0.35 * (1 - dist / 130)})`;
+                        ctx.lineWidth = 0.8 * scale;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateBgCanvas);
+        }
+        animateBgCanvas();
+
+        /* --- Supabase Integration Logic --- */
         const SUPABASE_URL = "https://kfpwbsjudktvupmicutn.supabase.co";
         const SUPABASE_KEY = "sb_publishable_eXirMUXywjoQHSmJlPaRyA_OtiZYJxf";
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
