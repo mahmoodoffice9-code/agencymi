@@ -12,20 +12,55 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030712; color: #f3f4f6; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030712; color: #f3f4f6; position: relative; }
+        
+        /* Video Background Styling */
+        #bgVideo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -20;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: brightness(0.25) contrast(1.2); /* Darkened so content pops */
+        }
+
+        /* Overlay Gradient for readability */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(3, 7, 18, 0.4) 0%, rgba(3, 7, 18, 0.85) 100%);
+            z-index: -10;
+            pointer-events: none;
+        }
+
         .gradient-text { background: linear-gradient(135deg, #818cf8 0%, #38bdf8 50%, #c084fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glass-card { background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); transition: all 0.4s ease; }
-        .glass-card:hover { border-color: rgba(129, 140, 248, 0.4); transform: translateY(-6px); }
-        .glow-button { box-shadow: 0 0 25px rgba(99, 102, 241, 0.5); }
-        .hero-glow { background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(3, 7, 18, 0) 70%); }
+        .glass-card { background: rgba(11, 15, 25, 0.75); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); transition: all 0.4s ease; }
+        .glass-card:hover { border-color: rgba(129, 140, 248, 0.5); transform: translateY(-6px); }
+        .glow-button { box-shadow: 0 0 25px rgba(99, 102, 241, 0.6); }
     </style>
 </head>
 <body class="selection:bg-indigo-500/35 overflow-x-hidden">
 
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] hero-glow pointer-events-none -z-10"></div>
+    <!-- Background Tech Video -->
+    <video autoplay loop muted playsinline id="bgVideo">
+        <!-- High Quality Tech / Digital Network Loop -->
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-data-41551-large.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <!-- Overlay Layer to maintain contrast -->
+    <div class="video-overlay"></div>
 
     <!-- Header / Navbar -->
-    <nav class="sticky top-0 z-40 bg-[#030712]/85 backdrop-blur-md border-b border-white/5 px-6 lg:px-12 py-4 max-w-7xl mx-auto flex justify-between items-center">
+    <nav class="sticky top-0 z-40 bg-[#030712]/80 backdrop-blur-lg border-b border-white/10 px-6 lg:px-12 py-4 max-w-7xl mx-auto flex justify-between items-center">
         <div class="text-2xl font-extrabold tracking-tight cursor-pointer flex items-center gap-2" onclick="showMainView()">
             <span class="bg-indigo-600 text-white p-1.5 rounded-xl text-lg font-bold shadow-lg shadow-indigo-500/30">⚡</span>
             APEX<span class="text-indigo-400">.</span>AI
@@ -51,14 +86,14 @@
             <h1 data-aos="zoom-in" data-aos-duration="1200" class="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 leading-[1.1]">
                 Scale Your Enterprise With <br><span class="gradient-text">Next-Generation AI Systems</span>
             </h1>
-            <p data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" class="text-lg md:text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
+            <p data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" class="text-lg md:text-xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed font-normal">
                 We engineer elite custom LLMs, intelligent multi-agent workflows, and advanced API architectures designed to multiply your revenue and automate operations. 🚀
             </p>
             <div data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000" class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <button onclick="handleStartProjectClick()" class="glow-button bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-2xl font-bold transition flex items-center gap-2 cursor-pointer">
                     Start Project / Live Chat 💬
                 </button>
-                <a href="#pricing" class="glass-card hover:bg-white/5 text-slate-200 px-8 py-4 rounded-2xl font-bold transition">
+                <a href="#pricing" class="glass-card hover:bg-white/10 text-slate-200 px-8 py-4 rounded-2xl font-bold transition">
                     View Pricing Plans 💎
                 </a>
             </div>
@@ -90,7 +125,7 @@
         <section id="services" class="max-w-7xl mx-auto px-6 py-20">
             <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
                 <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">Our Core Technical <span class="gradient-text">Competencies</span></h2>
-                <p class="text-slate-400 text-sm md:text-base">We combine deep learning models with enterprise-grade software stacks to build production-ready solutions.</p>
+                <p class="text-slate-300 text-sm md:text-base">We combine deep learning models with enterprise-grade software stacks to build production-ready solutions.</p>
             </div>
             
             <div class="grid md:grid-cols-3 gap-8">
@@ -98,11 +133,11 @@
                 <div class="glass-card p-8 rounded-3xl relative overflow-hidden group" data-aos="fade-up" data-aos-delay="100">
                     <div class="text-4xl mb-6 p-4 bg-indigo-500/10 w-fit rounded-2xl border border-indigo-500/20">🧠</div>
                     <h3 class="text-xl font-bold mb-3 text-white">Advanced Prompt Engineering & Model Tuning</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Crafting deterministic system prompts, few-shot learning pipelines, and fine-tuning open-source models for specific business logic.</p>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">Crafting deterministic system prompts, few-shot learning pipelines, and fine-tuning open-source models for specific business logic.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="text-[11px] bg-indigo-500/10 text-indigo-300 px-3 py-1 rounded-lg border border-indigo-500/20 font-medium">GPT-4o</span>
-                        <span class="text-[11px] bg-indigo-500/10 text-indigo-300 px-3 py-1 rounded-lg border border-indigo-500/20 font-medium">Claude 3.5</span>
-                        <span class="text-[11px] bg-indigo-500/10 text-indigo-300 px-3 py-1 rounded-lg border border-indigo-500/20 font-medium">RAG Pipelines</span>
+                        <span class="text-[11px] bg-indigo-500/20 text-indigo-300 px-3 py-1 rounded-lg border border-indigo-500/30 font-medium">GPT-4o</span>
+                        <span class="text-[11px] bg-indigo-500/20 text-indigo-300 px-3 py-1 rounded-lg border border-indigo-500/30 font-medium">Claude 3.5</span>
+                        <span class="text-[11px] bg-indigo-500/20 text-indigo-300 px-3 py-1 rounded-lg border border-indigo-500/30 font-medium">RAG Pipelines</span>
                     </div>
                 </div>
 
@@ -110,11 +145,11 @@
                 <div class="glass-card p-8 rounded-3xl relative overflow-hidden group" data-aos="fade-up" data-aos-delay="300">
                     <div class="text-4xl mb-6 p-4 bg-cyan-500/10 w-fit rounded-2xl border border-cyan-500/20">⚡</div>
                     <h3 class="text-xl font-bold mb-3 text-white">API Token Cost & Latency Optimization</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Implementing intelligent caching layers, semantic routers, and request batching to slash operational token bills by up to 60%.</p>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">Implementing intelligent caching layers, semantic routers, and request batching to slash operational token bills by up to 60%.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="text-[11px] bg-cyan-500/10 text-cyan-300 px-3 py-1 rounded-lg border border-cyan-500/20 font-medium">Smart Routing</span>
-                        <span class="text-[11px] bg-cyan-500/10 text-cyan-300 px-3 py-1 rounded-lg border border-cyan-500/20 font-medium">Redis Caching</span>
-                        <span class="text-[11px] bg-cyan-500/10 text-cyan-300 px-3 py-1 rounded-lg border border-cyan-500/20 font-medium">Supabase Cache</span>
+                        <span class="text-[11px] bg-cyan-500/20 text-cyan-300 px-3 py-1 rounded-lg border border-cyan-500/30 font-medium">Smart Routing</span>
+                        <span class="text-[11px] bg-cyan-500/20 text-cyan-300 px-3 py-1 rounded-lg border border-cyan-500/30 font-medium">Redis Caching</span>
+                        <span class="text-[11px] bg-cyan-500/20 text-cyan-300 px-3 py-1 rounded-lg border border-cyan-500/30 font-medium">Supabase Cache</span>
                     </div>
                 </div>
 
@@ -122,24 +157,24 @@
                 <div class="glass-card p-8 rounded-3xl relative overflow-hidden group" data-aos="fade-up" data-aos-delay="500">
                     <div class="text-4xl mb-6 p-4 bg-purple-500/10 w-fit rounded-2xl border border-purple-500/20">🔄</div>
                     <h3 class="text-xl font-bold mb-3 text-white">Autonomous Workflow Automation</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Building robust cross-platform workflows connecting CRMs, email clients, and databases using cloud automation engines.</p>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">Building robust cross-platform workflows connecting CRMs, email clients, and databases using cloud automation engines.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="text-[11px] bg-purple-500/10 text-purple-300 px-3 py-1 rounded-lg border border-purple-500/20 font-medium">n8n.io</span>
-                        <span class="text-[11px] bg-purple-500/10 text-purple-300 px-3 py-1 rounded-lg border border-purple-500/20 font-medium">Make.com</span>
-                        <span class="text-[11px] bg-purple-500/10 text-purple-300 px-3 py-1 rounded-lg border border-purple-500/20 font-medium">MindStudio</span>
+                        <span class="text-[11px] bg-purple-500/20 text-purple-300 px-3 py-1 rounded-lg border border-purple-500/30 font-medium">n8n.io</span>
+                        <span class="text-[11px] bg-purple-500/20 text-purple-300 px-3 py-1 rounded-lg border border-purple-500/30 font-medium">Make.com</span>
+                        <span class="text-[11px] bg-purple-500/20 text-purple-300 px-3 py-1 rounded-lg border border-purple-500/30 font-medium">MindStudio</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- PRICING PLANS SECTION -->
-        <section id="pricing" class="max-w-7xl mx-auto px-6 py-20 border-t border-white/5">
+        <section id="pricing" class="max-w-7xl mx-auto px-6 py-20 border-t border-white/10">
             <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
                 <div class="inline-flex items-center gap-2 px-3 py-1 mb-4 text-xs font-semibold bg-indigo-500/10 text-indigo-300 rounded-full border border-indigo-500/20 uppercase tracking-widest">
                     Transparent Investment
                 </div>
                 <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">Flexible & Results-Driven <span class="gradient-text">Pricing Tiers</span></h2>
-                <p class="text-slate-400 text-sm md:text-base">Choose a targeted solution or let us architect a complete custom system for your enterprise infrastructure.</p>
+                <p class="text-slate-300 text-sm md:text-base">Choose a targeted solution or let us architect a complete custom system for your enterprise infrastructure.</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -152,26 +187,26 @@
                         </div>
                         <h3 class="text-xl font-bold mb-1 text-white">Advanced Prompt Engineering & Model Tuning</h3>
                         <div class="text-3xl font-extrabold text-indigo-400 my-4">$200 <span class="text-xs font-normal text-slate-400">/ project</span></div>
-                        <p class="text-slate-400 text-xs leading-relaxed mb-6 font-medium">
+                        <p class="text-slate-300 text-xs leading-relaxed mb-6 font-medium">
                             Designed to eliminate hallucinations and secure absolute determinism from AI models for your specific business workflows.
                         </p>
                         <div class="space-y-3 mb-8">
                             <p class="text-xs font-bold text-indigo-300 uppercase tracking-wider">What’s Included:</p>
-                            <ul class="space-y-2.5 text-sm text-slate-300 font-light">
+                            <ul class="space-y-2.5 text-sm text-slate-200 font-normal">
                                 <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>3 Custom, Production-Ready System Prompts</strong> tailored to your exact brand and logic.</span></li>
                                 <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>Strict Output Guardrails</strong> & JSON/Markdown Formatting Control.</span></li>
                                 <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>Few-Shot Learning Examples</strong> setup to ensure precise, repeatable performance.</span></li>
                             </ul>
                         </div>
                     </div>
-                    <button onclick="handleStartProjectClick()" class="w-full bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white border border-indigo-500/40 py-3 rounded-xl font-bold transition cursor-pointer text-sm">
+                    <button onclick="handleStartProjectClick()" class="w-full bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 hover:text-white border border-indigo-500/50 py-3 rounded-xl font-bold transition cursor-pointer text-sm">
                         Select Package ⚡
                     </button>
                 </div>
 
                 <!-- Pricing Card 2 (Featured) -->
-                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between relative group border-cyan-500/40 bg-gradient-to-b from-indigo-950/30 via-slate-900/70 to-slate-900/90 shadow-cyan-500/10" data-aos="flip-left" data-aos-delay="300">
-                    <div class="absolute -top-3 right-8 bg-cyan-500 text-slate-950 text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">
+                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between relative group border-cyan-500/50 bg-gradient-to-b from-indigo-950/50 via-slate-900/80 to-slate-900/90 shadow-cyan-500/10" data-aos="flip-left" data-aos-delay="300">
+                    <div class="absolute -top-3 right-8 bg-cyan-400 text-slate-950 text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">
                         Most Popular 🔥
                     </div>
                     <div>
@@ -181,12 +216,12 @@
                         </div>
                         <h3 class="text-xl font-bold mb-1 text-white">LLM Integration & RAG Pipelines</h3>
                         <div class="text-3xl font-extrabold text-cyan-400 my-4">$500 <span class="text-xs font-normal text-slate-400">/ project</span></div>
-                        <p class="text-slate-400 text-xs leading-relaxed mb-6 font-medium">
+                        <p class="text-slate-300 text-xs leading-relaxed mb-6 font-medium">
                             Seamlessly bridging state-of-the-art language models (OpenAI, Claude) with your applications, backed by proprietary data storage.
                         </p>
                         <div class="space-y-3 mb-8">
                             <p class="text-xs font-bold text-cyan-300 uppercase tracking-wider">What’s Included:</p>
-                            <ul class="space-y-2.5 text-sm text-slate-300 font-light">
+                            <ul class="space-y-2.5 text-sm text-slate-200 font-normal">
                                 <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>End-to-end API Integration</strong> into your existing web apps, platforms, or workflows.</span></li>
                                 <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>Complete RAG Pipeline</strong> (Retrieval-Augmented Generation) Knowledge Base.</span></li>
                                 <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>Vector Database Setup</strong> and document chunking for precise document querying.</span></li>
@@ -207,32 +242,32 @@
                         </div>
                         <h3 class="text-xl font-bold mb-1 text-white">API Token Cost & Latency Optimization</h3>
                         <div class="text-3xl font-extrabold text-purple-400 my-4">$350 <span class="text-xs font-normal text-slate-400">/ project</span></div>
-                        <p class="text-slate-400 text-xs leading-relaxed mb-6 font-medium">
+                        <p class="text-slate-300 text-xs leading-relaxed mb-6 font-medium">
                             Cutting down bloated operational API expenses and accelerating response speeds without sacrificing output quality.
                         </p>
                         <div class="space-y-3 mb-8">
                             <p class="text-xs font-bold text-purple-300 uppercase tracking-wider">What’s Included:</p>
-                            <ul class="space-y-2.5 text-sm text-slate-300 font-light">
+                            <ul class="space-y-2.5 text-sm text-slate-200 font-normal">
                                 <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>Comprehensive Token Audit</strong> to identify and strip wasteful context & padding.</span></li>
                                 <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>Smart Model Routing</strong> configuration (leveraging cost-effective models).</span></li>
                                 <li class="flex items-start gap-2">✅ <span class="leading-tight"><strong>Caching Layer Implementation</strong> to instantly serve frequent queries & cut bills.</span></li>
                             </ul>
                         </div>
                     </div>
-                    <button onclick="handleStartProjectClick()" class="w-full bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white border border-purple-500/40 py-3 rounded-xl font-bold transition cursor-pointer text-sm">
+                    <button onclick="handleStartProjectClick()" class="w-full bg-purple-600/30 hover:bg-purple-600 text-purple-200 hover:text-white border border-purple-500/50 py-3 rounded-xl font-bold transition cursor-pointer text-sm">
                         Optimize API ⚡
                     </button>
                 </div>
             </div>
 
             <!-- Custom Enterprise Tier Banner -->
-            <div data-aos="zoom-in-up" data-aos-duration="1000" class="mt-8 glass-card p-8 md:p-10 rounded-3xl border border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 bg-gradient-to-r from-indigo-950/40 via-purple-950/30 to-slate-950/60">
+            <div data-aos="zoom-in-up" data-aos-duration="1000" class="mt-8 glass-card p-8 md:p-10 rounded-3xl border border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 bg-gradient-to-r from-indigo-950/60 via-purple-950/40 to-slate-950/80">
                 <div class="space-y-2 max-w-2xl">
                     <div class="flex items-center gap-2">
                         <span class="text-2xl">🌟</span>
                         <h3 class="text-xl md:text-2xl font-bold text-white">Need Something Special? Custom & Enterprise Projects</h3>
                     </div>
-                    <p class="text-slate-400 text-sm leading-relaxed">
+                    <p class="text-slate-300 text-sm leading-relaxed">
                         Have a unique AI architecture, multi-agent system, or a complex custom build in mind? We design scalable, end-to-end AI ecosystems tailored specifically to your unique business model and enterprise requirements.
                     </p>
                     <div class="flex flex-wrap gap-4 pt-2 text-xs text-indigo-300 font-medium">
@@ -242,7 +277,7 @@
                     </div>
                 </div>
                 <div class="text-center md:text-right shrink-0">
-                    <div class="text-xl font-bold text-slate-300 mb-3">Custom Quote <span class="text-xs font-normal text-slate-500">(Based on Scope)</span></div>
+                    <div class="text-xl font-bold text-slate-300 mb-3">Custom Quote <span class="text-xs font-normal text-slate-400">(Based on Scope)</span></div>
                     <button onclick="handleStartProjectClick()" class="glow-button bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-3.5 rounded-xl font-bold transition cursor-pointer text-sm">
                         Request Custom Quote 💬
                     </button>
@@ -251,10 +286,10 @@
         </section>
 
         <!-- Case Studies & Client Reviews Section -->
-        <section id="case-studies" class="max-w-7xl mx-auto px-6 py-20 border-t border-white/5">
+        <section id="case-studies" class="max-w-7xl mx-auto px-6 py-20 border-t border-white/10">
             <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
                 <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">Client Case Studies & <span class="gradient-text">Success Stories</span></h2>
-                <p class="text-slate-400 text-sm md:text-base">Real metrics and reviews from global enterprises who scaled their operations with our AI integrations.</p>
+                <p class="text-slate-300 text-sm md:text-base">Real metrics and reviews from global enterprises who scaled their operations with our AI integrations.</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -266,14 +301,14 @@
                             <div class="flex items-center text-amber-400 text-sm font-bold gap-1">⭐ 5.0</div>
                         </div>
                         <h3 class="text-xl font-bold mb-2">ShopFlow AI Chatbot Scaling</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                            <strong class="text-slate-200">Challenge:</strong> High support ticket volume during seasonal sales.<br>
-                            <strong class="text-slate-200">Solution:</strong> Deployed a customized GPT-4o support agent integrated with Shopify APIs.<br>
-                            <strong class="text-slate-200">Result:</strong> 85% queries automated instantly.
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            <strong class="text-slate-100">Challenge:</strong> High support ticket volume during seasonal sales.<br>
+                            <strong class="text-slate-100">Solution:</strong> Deployed a customized GPT-4o support agent integrated with Shopify APIs.<br>
+                            <strong class="text-slate-100">Result:</strong> 85% queries automated instantly.
                         </p>
                     </div>
-                    <div class="border-t border-white/5 pt-4 flex items-center justify-between text-xs text-slate-400">
-                        <span class="font-bold text-slate-300">Marcus Vance</span>
+                    <div class="border-t border-white/10 pt-4 flex items-center justify-between text-xs text-slate-400">
+                        <span class="font-bold text-slate-200">Marcus Vance</span>
                         <span>CTO, NovaCart</span>
                     </div>
                 </div>
@@ -286,14 +321,14 @@
                             <div class="flex items-center text-amber-400 text-sm font-bold gap-1">⭐ 4.5</div>
                         </div>
                         <h3 class="text-xl font-bold mb-2">Token Cost Reduction Pipeline</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                            <strong class="text-slate-200">Challenge:</strong> Soaring monthly OpenAI API token expenses exceeding $18K.<br>
-                            <strong class="text-slate-200">Solution:</strong> Implemented smart semantic request routing and Redis caching layer.<br>
-                            <strong class="text-slate-200">Result:</strong> Cut operational API spending by 58%.
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            <strong class="text-slate-100">Challenge:</strong> Soaring monthly OpenAI API token expenses exceeding $18K.<br>
+                            <strong class="text-slate-100">Solution:</strong> Implemented smart semantic request routing and Redis caching layer.<br>
+                            <strong class="text-slate-100">Result:</strong> Cut operational API spending by 58%.
                         </p>
                     </div>
-                    <div class="border-t border-white/5 pt-4 flex items-center justify-between text-xs text-slate-400">
-                        <span class="font-bold text-slate-300">Elena Rostova</span>
+                    <div class="border-t border-white/10 pt-4 flex items-center justify-between text-xs text-slate-400">
+                        <span class="font-bold text-slate-200">Elena Rostova</span>
                         <span>Lead Architect, PayScale</span>
                     </div>
                 </div>
@@ -306,14 +341,14 @@
                             <div class="flex items-center text-amber-400 text-sm font-bold gap-1">⭐ 4.0</div>
                         </div>
                         <h3 class="text-xl font-bold mb-2">Automated Lead Qualification</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                            <strong class="text-slate-200">Challenge:</strong> Manual sorting of hundreds of property inquiry emails daily.<br>
-                            <strong class="text-slate-200">Solution:</strong> Built an n8n and Make automation pipeline with LLM scoring filters.<br>
-                            <strong class="text-slate-200">Result:</strong> Response time shortened from hours to 30 seconds.
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            <strong class="text-slate-100">Challenge:</strong> Manual sorting of hundreds of property inquiry emails daily.<br>
+                            <strong class="text-slate-100">Solution:</strong> Built an n8n and Make automation pipeline with LLM scoring filters.<br>
+                            <strong class="text-slate-100">Result:</strong> Response time shortened from hours to 30 seconds.
                         </p>
                     </div>
-                    <div class="border-t border-white/5 pt-4 flex items-center justify-between text-xs text-slate-400">
-                        <span class="font-bold text-slate-300">Tariq Al-Mansoor</span>
+                    <div class="border-t border-white/10 pt-4 flex items-center justify-between text-xs text-slate-400">
+                        <span class="font-bold text-slate-200">Tariq Al-Mansoor</span>
                         <span>Director, Apex Estates</span>
                     </div>
                 </div>
@@ -326,14 +361,14 @@
                             <div class="flex items-center text-amber-400 text-sm font-bold gap-1">⭐ 3.4</div>
                         </div>
                         <h3 class="text-xl font-bold mb-2">Custom RAG Knowledge Base</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                            <strong class="text-slate-200">Challenge:</strong> Integrating messy corporate PDF documentation into internal search.<br>
-                            <strong class="text-slate-200">Solution:</strong> Vector database embedding and document chunking pipeline.<br>
-                            <strong class="text-slate-200">Result:</strong> Took an extra 4 days due to formatting bugs, but final output works reliably.
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            <strong class="text-slate-100">Challenge:</strong> Integrating messy corporate PDF documentation into internal search.<br>
+                            <strong class="text-slate-100">Solution:</strong> Vector database embedding and document chunking pipeline.<br>
+                            <strong class="text-slate-100">Result:</strong> Took an extra 4 days due to formatting bugs, but final output works reliably.
                         </p>
                     </div>
-                    <div class="border-t border-white/5 pt-4 flex items-center justify-between text-xs text-slate-400">
-                        <span class="font-bold text-slate-300">David Miller</span>
+                    <div class="border-t border-white/10 pt-4 flex items-center justify-between text-xs text-slate-400">
+                        <span class="font-bold text-slate-200">David Miller</span>
                         <span>Operations Head, CloudSync</span>
                     </div>
                 </div>
@@ -346,14 +381,14 @@
                             <div class="flex items-center text-amber-400 text-sm font-bold gap-1">⭐ 4.8</div>
                         </div>
                         <h3 class="text-xl font-bold mb-2">Patient Appointment Assistant</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                            <strong class="text-slate-200">Challenge:</strong> Managing clinic scheduling friction across multiple time zones.<br>
-                            <strong class="text-slate-200">Solution:</strong> Secure multi-agent voice and text booking workflow deployment.<br>
-                            <strong class="text-slate-200">Result:</strong> Zero missed bookings over 3 months of operations.
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            <strong class="text-slate-100">Challenge:</strong> Managing clinic scheduling friction across multiple time zones.<br>
+                            <strong class="text-slate-100">Solution:</strong> Secure multi-agent voice and text booking workflow deployment.<br>
+                            <strong class="text-slate-100">Result:</strong> Zero missed bookings over 3 months of operations.
                         </p>
                     </div>
-                    <div class="border-t border-white/5 pt-4 flex items-center justify-between text-xs text-slate-400">
-                        <span class="font-bold text-slate-300">Dr. Sarah Jenkins</span>
+                    <div class="border-t border-white/10 pt-4 flex items-center justify-between text-xs text-slate-400">
+                        <span class="font-bold text-slate-200">Dr. Sarah Jenkins</span>
                         <span>Founder, WellCare Clinic</span>
                     </div>
                 </div>
@@ -366,14 +401,14 @@
                             <div class="flex items-center text-amber-400 text-sm font-bold gap-1">⭐ 4.2</div>
                         </div>
                         <h3 class="text-xl font-bold mb-2">AI Homework Feedback Tutor</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                            <strong class="text-slate-200">Challenge:</strong> Slow instructor turnaround times for grading student programming assignments.<br>
-                            <strong class="text-slate-200">Solution:</strong> Prompt-engineered code review bot running on custom endpoints.<br>
-                            <strong class="text-slate-200">Result:</strong> Students receive instant preliminary feedback within seconds.
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            <strong class="text-slate-100">Challenge:</strong> Slow instructor turnaround times for grading student programming assignments.<br>
+                            <strong class="text-slate-100">Solution:</strong> Prompt-engineered code review bot running on custom endpoints.<br>
+                            <strong class="text-slate-100">Result:</strong> Students receive instant preliminary feedback within seconds.
                         </p>
                     </div>
-                    <div class="border-t border-white/5 pt-4 flex items-center justify-between text-xs text-slate-400">
-                        <span class="font-bold text-slate-300">Liam O'Connor</span>
+                    <div class="border-t border-white/10 pt-4 flex items-center justify-between text-xs text-slate-400">
+                        <span class="font-bold text-slate-200">Liam O'Connor</span>
                         <span>CEO, CodeAcademy Pro</span>
                     </div>
                 </div>
@@ -386,29 +421,29 @@
                 <div>
                     <span class="text-indigo-400 font-bold text-xs uppercase tracking-widest">Who We Are</span>
                     <h2 class="text-3xl md:text-4xl font-extrabold mt-2 mb-6">Engineered for Maximum Impact and Scale</h2>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">
                         Apex Intelligence was built to bridge the gap between complex artificial intelligence research and practical business execution. We don't just write prompts; we build self-sustaining automation ecosystems that run seamlessly 24/7.
                     </p>
-                    <ul class="space-y-3 text-sm text-slate-300 font-medium">
+                    <ul class="space-y-3 text-sm text-slate-200 font-medium">
                         <li class="flex items-center gap-3">✅ Production-grade security & encrypted data handling</li>
                         <li class="flex items-center gap-3">✅ Lightning-fast serverless architecture (Vercel & Supabase)</li>
                         <li class="flex items-center gap-3">✅ Dedicated client management portal with real-time tracking</li>
                     </ul>
                 </div>
-                <div class="bg-slate-950/60 p-8 rounded-3xl border border-white/5 space-y-4">
+                <div class="bg-slate-950/80 p-8 rounded-3xl border border-white/10 space-y-4">
                     <h3 class="text-lg font-bold text-indigo-300 mb-2">Our Modern Tech Stack 🛠️</h3>
-                    <div class="grid grid-cols-2 gap-3 text-xs font-semibold text-slate-300">
-                        <div class="p-3 bg-white/5 rounded-xl border border-white/5 flex items-center gap-2">⚡ Next.js / Tailwind</div>
-                        <div class="p-3 bg-white/5 rounded-xl border border-white/5 flex items-center gap-2">🔥 Supabase / Neon</div>
-                        <div class="p-3 bg-white/5 rounded-xl border border-white/5 flex items-center gap-2">🤖 OpenAI / Claude APIs</div>
-                        <div class="p-3 bg-white/5 rounded-xl border border-white/5 flex items-center gap-2">⚙️ n8n & Make Automations</div>
+                    <div class="grid grid-cols-2 gap-3 text-xs font-semibold text-slate-200">
+                        <div class="p-3 bg-white/5 rounded-xl border border-white/10 flex items-center gap-2">⚡ Next.js / Tailwind</div>
+                        <div class="p-3 bg-white/5 rounded-xl border border-white/10 flex items-center gap-2">🔥 Supabase / Neon</div>
+                        <div class="p-3 bg-white/5 rounded-xl border border-white/10 flex items-center gap-2">🤖 OpenAI / Claude APIs</div>
+                        <div class="p-3 bg-white/5 rounded-xl border border-white/10 flex items-center gap-2">⚙️ n8n & Make Automations</div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Footer -->
-        <footer class="border-t border-white/5 py-12 text-center text-slate-500 text-xs">
+        <footer class="border-t border-white/10 py-12 text-center text-slate-400 text-xs">
             <p>© 2026 Apex Intelligence. All rights reserved. Built for elite enterprise automation.</p>
         </footer>
     </div>
@@ -471,7 +506,7 @@
                 <div id="adminClientList" class="space-y-2 border-r border-white/10 pr-4 max-h-[350px] overflow-y-auto"></div>
                 <div class="md:col-span-2 flex flex-col h-[350px]">
                     <h4 id="activeChatTitle" class="font-bold text-indigo-400 mb-2">Select a client to chat</h4>
-                    <div id="adminChatMessages" class="flex-1 overflow-y-auto space-y-3 mb-4 pr-2 text-sm bg-slate-950/40 p-4 rounded-xl border border-white/5">
+                    <div id="adminChatMessages" class="flex-1 overflow-y-auto space-y-3 mb-4 pr-2 text-sm bg-slate-950/60 p-4 rounded-xl border border-white/5">
                         <p class="text-slate-500 text-center mt-20">No conversation selected.</p>
                     </div>
                     <form id="adminChatForm" class="hidden flex gap-2">
@@ -575,10 +610,9 @@
 
     <!-- Script Logic & Supabase Integration -->
     <script>
-        // Initialize Animations
         AOS.init({
             duration: 800,
-            once: false, // Scroll back up karne par bhi repeat ho sakti hain
+            once: false,
             mirror: true
         });
 
@@ -729,7 +763,6 @@
             showMainView();
         }
 
-        // CHAT LOGIC
         async function loadClientMessages() {
             const activeUser = JSON.parse(localStorage.getItem('apex_active_session'));
             if (!activeUser) return;
