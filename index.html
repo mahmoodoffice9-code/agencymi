@@ -11,8 +11,30 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #021210; color: #f0fdf4; position: relative; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #021210; 
+            color: #f0fdf4; 
+            position: relative; 
+        }
+
+        /* Custom Tech Scrollbar for Chat Window */
+        .custom-chat-scroll::-webkit-scrollbar {
+            width: 5px;
+        }
+        .custom-chat-scroll::-webkit-scrollbar-track {
+            background: rgba(2, 18, 16, 0.5);
+            border-radius: 10px;
+        }
+        .custom-chat-scroll::-webkit-scrollbar-thumb {
+            background: rgba(52, 211, 153, 0.3);
+            border-radius: 10px;
+        }
+        .custom-chat-scroll::-webkit-scrollbar-thumb:hover {
+            background: rgba(52, 211, 153, 0.6);
+        }
         
         /* Video Background Styling */
         #bgVideo {
@@ -45,6 +67,14 @@
         .glass-card { background: rgba(6, 30, 26, 0.75); backdrop-filter: blur(24px); border: 1px solid rgba(52, 211, 153, 0.15); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6); transition: all 0.4s ease; }
         .glass-card:hover { border-color: rgba(52, 211, 153, 0.5); transform: translateY(-6px); }
         .glow-button { box-shadow: 0 0 25px rgba(16, 185, 129, 0.5); }
+        
+        /* Cyber Terminal Effect */
+        .chat-glass {
+            background: rgba(2, 22, 19, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(52, 211, 153, 0.25);
+            box-shadow: 0 0 35px rgba(6, 182, 212, 0.12);
+        }
     </style>
 </head>
 <body class="selection:bg-emerald-500/35 overflow-x-hidden">
@@ -447,70 +477,134 @@
         </footer>
     </div>
 
-    <!-- Client Portal Section -->
+    <!-- Client Portal Section (UPGRADED TECHY & STYLISH UI) -->
     <div id="portalSection" class="hidden max-w-6xl mx-auto px-6 py-12 space-y-6">
-        <div class="flex justify-between items-center">
-            <h2 class="text-3xl font-bold">Client Dashboard & Support</h2>
-        </div>
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="glass-card p-6 rounded-2xl md:col-span-1">
-                <h3 class="font-bold text-lg mb-2">Project Status</h3>
-                <p class="text-emerald-100/70 text-sm">Your deliverables are in progress. Connect with support via live chat for instant updates.</p>
+        <div class="flex justify-between items-center border-b border-emerald-500/20 pb-4">
+            <div>
+                <h2 class="text-3xl font-extrabold tracking-tight flex items-center gap-3">
+                    Client Command Center <span class="text-xs px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-md font-mono">v2.4 Live</span>
+                </h2>
+                <p class="text-emerald-100/60 text-xs mt-1">Real-time encryption & instant engineering team access 🔒</p>
             </div>
-            <div class="glass-card p-6 rounded-2xl md:col-span-2 flex flex-col h-[400px]">
-                <h3 class="font-bold text-lg mb-4 text-emerald-400">💬 Direct Support Chat</h3>
-                <div id="chatMessages" class="flex-1 overflow-y-auto space-y-3 mb-4 pr-2 text-sm"></div>
-                <form id="chatForm" class="flex gap-2">
-                    <input type="text" id="chatInput" required placeholder="Type your message here..." class="flex-1 bg-slate-950 border border-emerald-500/30 rounded-xl p-3 text-sm outline-none focus:border-emerald-400">
-                    <button type="submit" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-6 rounded-xl font-bold transition">Send 🚀</button>
+            <button onclick="showMainView()" class="text-xs text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 px-4 py-2 rounded-xl border border-emerald-500/30 transition">← Back to Site</button>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- Sidebar Info Widget -->
+            <div class="glass-card p-6 rounded-2xl md:col-span-1 space-y-5 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-sm text-emerald-300 uppercase tracking-wider font-mono">Project Overview</h3>
+                        <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse shadow-lg shadow-emerald-500"></span>
+                    </div>
+                    
+                    <div class="space-y-3 text-xs">
+                        <div class="p-3 rounded-xl bg-slate-950/70 border border-emerald-500/20 flex justify-between items-center">
+                            <span class="text-emerald-200/60">Status</span>
+                            <span class="text-emerald-400 font-bold font-mono">In Progress ⚙️</span>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-950/70 border border-emerald-500/20 flex justify-between items-center">
+                            <span class="text-emerald-200/60">Encrypted Channel</span>
+                            <span class="text-cyan-400 font-bold font-mono">AES-256</span>
+                        </div>
+                    </div>
+
+                    <p class="text-emerald-100/70 text-xs leading-relaxed mt-4 p-3 bg-emerald-950/30 rounded-xl border border-emerald-500/15">
+                        💡 Direct connection to lead engineers. Ask questions or get instant delivery updates right here.
+                    </p>
+                </div>
+
+                <div class="border-t border-emerald-500/15 pt-4 text-[11px] text-emerald-200/50 flex items-center justify-between">
+                    <span>Latency: <strong class="text-emerald-400 font-mono">24ms</strong></span>
+                    <span>Server: <strong class="text-emerald-400 font-mono">US-East</strong></span>
+                </div>
+            </div>
+
+            <!-- Styled Tech Chat Box -->
+            <div class="chat-glass p-6 rounded-2xl md:col-span-2 flex flex-col h-[520px] relative border border-emerald-500/30">
+                <!-- Chat Window Top Header -->
+                <div class="flex items-center justify-between border-b border-emerald-500/20 pb-3 mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></div>
+                        <h3 class="font-bold text-base text-emerald-300 font-mono flex items-center gap-2">
+                            💬 Live Support Terminal
+                        </h3>
+                    </div>
+                    <span class="text-[10px] bg-cyan-500/10 text-cyan-300 px-3 py-1 rounded-full border border-cyan-500/30 font-mono">
+                        Active Agent Online 🟢
+                    </span>
+                </div>
+
+                <!-- Messages Container -->
+                <div id="chatMessages" class="flex-1 overflow-y-auto space-y-4 mb-4 pr-2 custom-chat-scroll text-sm">
+                    <!-- Dynamically populated -->
+                </div>
+
+                <!-- Input Box -->
+                <form id="chatForm" class="flex gap-2 relative">
+                    <input type="text" id="chatInput" required placeholder="Type encrypted message to engineer..." class="flex-1 bg-slate-950/90 border border-emerald-500/30 rounded-xl px-4 py-3 text-sm text-emerald-100 outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400/50 transition placeholder-emerald-100/30 font-mono">
+                    <button type="submit" class="glow-button bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-6 rounded-xl font-bold transition flex items-center gap-2 cursor-pointer shrink-0">
+                        Send 🚀
+                    </button>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- ADMIN PANEL SECTION -->
+    <!-- ADMIN PANEL SECTION (UPGRADED STYLISH CHAT INTERFACE) -->
     <div id="adminSection" class="hidden max-w-7xl mx-auto px-6 py-12 space-y-8">
         <div class="flex justify-between items-center border-b border-emerald-500/15 pb-6">
             <div>
-                <h1 class="text-3xl font-extrabold">Apex Admin Control Panel 🛠️</h1>
-                <p class="text-emerald-200/60 text-sm mt-1">Authorized Access: mahmoodoffice9@gmail.com</p>
+                <h1 class="text-3xl font-extrabold tracking-tight">Apex Admin Control Panel 🛠️</h1>
+                <p class="text-emerald-200/60 text-xs font-mono mt-1">Authorized Access: mahmoodoffice9@gmail.com</p>
             </div>
-            <div class="bg-emerald-500/20 border border-emerald-500/40 px-4 py-2 rounded-xl text-emerald-300 text-sm font-semibold">
-                Admin Mode Active 🟢
+            <div class="bg-emerald-500/20 border border-emerald-500/40 px-4 py-2 rounded-xl text-emerald-300 text-sm font-semibold flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Admin Mode Active
             </div>
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div class="glass-card p-6 rounded-2xl">
                 <h3 class="text-emerald-200/60 text-xs uppercase tracking-wider">Msgs Today</h3>
-                <p id="statMsgs" class="text-3xl font-extrabold mt-2 text-cyan-400">0</p>
+                <p id="statMsgs" class="text-3xl font-extrabold mt-2 text-cyan-400 font-mono">0</p>
             </div>
             <div class="glass-card p-6 rounded-2xl">
                 <h3 class="text-emerald-200/60 text-xs uppercase tracking-wider">Deals Closed Today</h3>
-                <p id="statDeals" class="text-3xl font-extrabold mt-2 text-emerald-400">3</p>
+                <p id="statDeals" class="text-3xl font-extrabold mt-2 text-emerald-400 font-mono">3</p>
             </div>
             <div class="glass-card p-6 rounded-2xl">
                 <h3 class="text-emerald-200/60 text-xs uppercase tracking-wider">Projects Locked (Today)</h3>
-                <p id="statLockedToday" class="text-3xl font-extrabold mt-2 text-teal-400">2</p>
+                <p id="statLockedToday" class="text-3xl font-extrabold mt-2 text-teal-400 font-mono">2</p>
             </div>
             <div class="glass-card p-6 rounded-2xl">
                 <h3 class="text-emerald-200/60 text-xs uppercase tracking-wider">Projects Delivered</h3>
-                <p id="statDeliveredToday" class="text-3xl font-extrabold mt-2 text-emerald-300">1</p>
+                <p id="statDeliveredToday" class="text-3xl font-extrabold mt-2 text-emerald-300 font-mono">1</p>
             </div>
         </div>
 
-        <div class="glass-card p-8 rounded-[2rem]">
-            <h3 class="text-xl font-bold mb-4">💬 Live Client Chats</h3>
+        <!-- Sleek Admin Chat Console -->
+        <div class="chat-glass p-8 rounded-[2rem] border border-emerald-500/25">
+            <h3 class="text-xl font-bold mb-6 flex items-center gap-2 font-mono text-emerald-300">
+                💬 Live Client Communications Console
+            </h3>
             <div class="grid md:grid-cols-3 gap-6">
-                <div id="adminClientList" class="space-y-2 border-r border-emerald-500/15 pr-4 max-h-[350px] overflow-y-auto"></div>
-                <div class="md:col-span-2 flex flex-col h-[350px]">
-                    <h4 id="activeChatTitle" class="font-bold text-emerald-400 mb-2">Select a client to chat</h4>
-                    <div id="adminChatMessages" class="flex-1 overflow-y-auto space-y-3 mb-4 pr-2 text-sm bg-slate-950/60 p-4 rounded-xl border border-emerald-500/15">
-                        <p class="text-emerald-200/40 text-center mt-20">No conversation selected.</p>
+                <!-- Client List Sidebar -->
+                <div id="adminClientList" class="space-y-2 border-r border-emerald-500/15 pr-4 max-h-[420px] overflow-y-auto custom-chat-scroll"></div>
+                
+                <!-- Active Conversation Window -->
+                <div class="md:col-span-2 flex flex-col h-[420px] bg-slate-950/80 rounded-2xl border border-emerald-500/20 p-4">
+                    <div class="border-b border-emerald-500/15 pb-3 mb-3 flex justify-between items-center">
+                        <h4 id="activeChatTitle" class="font-bold text-emerald-400 text-sm font-mono">Select a client to start terminal session</h4>
+                        <span class="text-[10px] text-emerald-200/40 font-mono">Console SSL Verified 🛡️</span>
                     </div>
-                    <form id="adminChatForm" class="hidden flex gap-2">
-                        <input type="text" id="adminChatInput" required placeholder="Type reply as admin..." class="flex-1 bg-slate-950 border border-emerald-500/30 rounded-xl p-3 text-sm outline-none focus:border-emerald-400">
-                        <button type="submit" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-6 rounded-xl font-bold transition">Reply ⚡</button>
+                    
+                    <div id="adminChatMessages" class="flex-1 overflow-y-auto space-y-3 mb-4 pr-2 text-sm custom-chat-scroll">
+                        <p class="text-emerald-200/40 text-center mt-28 text-xs font-mono">No conversation selected.</p>
+                    </div>
+                    
+                    <form id="adminChatForm" class="hidden flex gap-2 pt-2 border-t border-emerald-500/15">
+                        <input type="text" id="adminChatInput" required placeholder="Type reply as admin..." class="flex-1 bg-slate-900 border border-emerald-500/30 rounded-xl px-4 py-3 text-sm text-emerald-100 outline-none focus:border-emerald-400 font-mono">
+                        <button type="submit" class="glow-button bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-6 rounded-xl font-bold transition cursor-pointer text-sm font-mono shrink-0">Reply ⚡</button>
                     </form>
                 </div>
             </div>
@@ -762,6 +856,7 @@
             showMainView();
         }
 
+        /* UPDATED STYLISH MESSAGE BUBBLES IN CLIENT VIEW */
         async function loadClientMessages() {
             const activeUser = JSON.parse(localStorage.getItem('apex_active_session'));
             if (!activeUser) return;
@@ -779,11 +874,15 @@
                 data.forEach(m => {
                     const isMe = m.sender === activeUser.email;
                     chatBox.innerHTML += `
-                        <div class="flex flex-col ${isMe ? 'items-end' : 'items-start'}">
-                            <div class="max-w-[80%] p-3 rounded-xl text-sm ${isMe ? 'bg-emerald-500 text-slate-950 font-medium' : 'bg-slate-900 text-emerald-100 border border-emerald-500/20'}">
+                        <div class="flex flex-col ${isMe ? 'items-end' : 'items-start'} animate-fade-in">
+                            <div class="max-w-[80%] p-3.5 rounded-2xl text-xs md:text-sm shadow-lg ${
+                                isMe 
+                                ? 'bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-semibold rounded-br-none shadow-emerald-500/10' 
+                                : 'bg-slate-900/90 text-emerald-100 border border-emerald-500/30 rounded-bl-none shadow-black/40'
+                            }">
                                 ${m.message}
                             </div>
-                            <span class="text-[10px] text-emerald-200/40 mt-1">${new Date(m.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                            <span class="text-[9px] text-emerald-200/40 mt-1 font-mono">${new Date(m.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
                         </div>
                     `;
                 });
@@ -825,24 +924,32 @@
 
             const emails = Object.keys(clientsMap);
             if (emails.length === 0) {
-                clientListDiv.innerHTML = `<p class="text-emerald-200/40 text-xs">No client messages yet.</p>`;
+                clientListDiv.innerHTML = `<p class="text-emerald-200/40 text-xs font-mono">No client messages yet.</p>`;
                 return;
             }
 
             emails.forEach(email => {
+                const isSelected = email === activeSelectedClient;
                 clientListDiv.innerHTML += `
-                    <button onclick="selectAdminClient('${email}')" class="w-full text-left p-3 rounded-xl hover:bg-white/5 transition flex items-center justify-between border border-emerald-500/10 cursor-pointer">
-                        <span class="text-xs font-bold text-emerald-100 truncate">${email}</span>
-                        <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">Chat</span>
+                    <button onclick="selectAdminClient('${email}')" class="w-full text-left p-3 rounded-xl transition flex items-center justify-between border cursor-pointer ${
+                        isSelected 
+                        ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300' 
+                        : 'bg-slate-950/40 hover:bg-white/5 border-emerald-500/10 text-emerald-100/70'
+                    }">
+                        <span class="text-xs font-medium font-mono truncate">${email}</span>
+                        <span class="text-[9px] bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded font-mono border border-cyan-500/30">Select</span>
                     </button>
                 `;
             });
         }
 
+        /* UPDATED STYLISH MESSAGE BUBBLES IN ADMIN VIEW */
         async function selectAdminClient(clientEmail) {
             activeSelectedClient = clientEmail;
-            document.getElementById('activeChatTitle').innerText = "Chat with: " + clientEmail;
+            document.getElementById('activeChatTitle').innerText = "Session Target: " + clientEmail;
             document.getElementById('adminChatForm').classList.remove('hidden');
+
+            loadAdminClientsList();
 
             const { data, error } = await supabaseClient
                 .from('messages')
@@ -858,10 +965,14 @@
                     const isMe = m.sender === ADMIN_EMAIL;
                     adminChatBox.innerHTML += `
                         <div class="flex flex-col ${isMe ? 'items-end' : 'items-start'}">
-                            <div class="max-w-[80%] p-3 rounded-xl text-sm ${isMe ? 'bg-emerald-500 text-slate-950 font-medium' : 'bg-slate-900 text-emerald-100 border border-emerald-500/20'}">
+                            <div class="max-w-[80%] p-3 rounded-2xl text-xs md:text-sm shadow-md ${
+                                isMe 
+                                ? 'bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-semibold rounded-br-none' 
+                                : 'bg-slate-900 text-emerald-100 border border-emerald-500/30 rounded-bl-none'
+                            }">
                                 ${m.message}
                             </div>
-                            <span class="text-[10px] text-emerald-200/40 mt-1">${new Date(m.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                            <span class="text-[9px] text-emerald-200/40 mt-1 font-mono">${new Date(m.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
                         </div>
                     `;
                 });
